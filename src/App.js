@@ -1,11 +1,19 @@
 import React from 'react';
-import './styles/main.css';
+import { ErrorAlert } from './components/alerts/ErrorAlert';
+import { SuccessAlert } from './components/alerts/SuccessAlert';
+import { WarningAlert } from './components/alerts/WarningAlert';
 
 function App() {
   return (
-    <div className="m-16">
-      <p>Voting App</p>
-    </div>
+    <>
+      <h1 className="m-4 text-lg font-semibold">Demo</h1>
+      <SuccessAlert title="Hecho" body="Esto es un mensaje de éxito." />
+      <ErrorAlert title="Error" body="Esto es un mensaje de error." />
+      <WarningAlert
+        title="Precaución"
+        body="Esto es un mensaje de precaución."
+      />
+    </>
   );
 }
 
