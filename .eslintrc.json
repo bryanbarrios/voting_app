@@ -6,11 +6,12 @@
   "plugins": ["prettier"],
   "rules": {
     "semi": "error",
-    "react/jsx-filename-extension": [
+    "react/jsx-filename-extension": [import/prefer-default-export": "off",
       1,
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off"
   }
 }
