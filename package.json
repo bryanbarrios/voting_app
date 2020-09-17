@@ -20,12 +20,14 @@
     "tailwindcss": "^1.8.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "build:tailwind": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "watch:tailwind": "chokidar 'src/**/*.css' --ignore src/styles/main.css -c 'npm run build:tailwind'",
+    "start": "npm-run-all build:tailwind --parallel watch:tailwind start:react",
+    "start:react": "react-scripts start",
+    "prebuild": "run-s build:tailwind",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css -w"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
