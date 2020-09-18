@@ -3,7 +3,10 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  purge: ['./src/**/*.{js,jsx,html}'],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production' ? true : false,
+    content: ['./src/**/*.{js,jsx,html}'],
+  },
   target: 'relaxed',
   prefix: '',
   important: false,
