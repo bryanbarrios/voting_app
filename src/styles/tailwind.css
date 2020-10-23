@@ -1,5 +1,28 @@
-@import 'tailwindcss/base';
+@tailwind base;
 
-@import 'tailwindcss/components';
+@tailwind components;
 
-@import 'tailwindcss/utilities';
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Inter;
+    font-weight: 400;
+    src: url(../assets/fonts/inter/Inter-Regular.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 500;
+    src: url(../assets/fonts/inter/Inter-Medium.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 600;
+    src: url(../assets/fonts/inter/Inter-SemiBold.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 700;
+    src: url(../assets/fonts/inter/Inter-Bold.woff2) format('woff2');
+  }
+}

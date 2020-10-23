@@ -257,6 +257,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Inter',
         'system-ui',
         '-apple-system',
         'BlinkMacSystemFont',
@@ -279,7 +280,7 @@ module.exports = {
         '"Liberation Mono"',
         '"Courier New"',
         'monospace',
-      ],
+      ]
     },
     fontSize: {
       xs: '0.75rem',
