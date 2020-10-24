@@ -12,7 +12,7 @@ export const PublicRoute = ({
 			{...rest}
 			component = { props => (
 				isAuthenticated && restricted
-				? <Redirect to="/" />
+				? <Redirect to="/elections" />
 				: <Component { ...props } />
 			)}
 		/>
