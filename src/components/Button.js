@@ -6,13 +6,15 @@ export const Button = ({
 	variant = 'solid',
 	variantColor = 'primary',
 	size = 'sm',
+	isBlock = false,
 	text,
+	type = 'button',
 	...props
 }) => {
 	return (
 		<button
 			className={cx(
-				'py-2 px-4 rounded-md font-semibold focus:outline-none transition duration-200 ease-in',
+				'py-2 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
 				{
 					'border-solid border-2 border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600':
 						variant === 'outline' && variantColor === 'primary',
@@ -26,8 +28,10 @@ export const Button = ({
 					'text-sm': size === 'sm',
 					'text-base': size === 'base',
 					'text-lg': size === 'lg',
+					'w-full': isBlock === true,
 				}
 			)}
+			type={type}
 		>
 			{text}
 		</button>
@@ -35,7 +39,7 @@ export const Button = ({
 };
 
 Button.propTypes = {
-	variant: PropTypes.oneOf(['solid', 'outline']),
+	variant: PropTypes.oneOf(['solid', 'outline', 'link']),
 	variantColor: PropTypes.oneOf(['primary', 'secondary']),
 	size: PropTypes.oneOf(['xs', 'sm', 'base', 'lg']),
 	text: PropTypes.string.isRequired,

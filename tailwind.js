@@ -176,6 +176,10 @@ module.exports = {
 			56: '14rem',
 			64: '16rem',
 		},
+		backdropFilter: {
+			none: 'none',
+			blur: 'blur(20px)',
+		},
 		backgroundColor: (theme) => theme('colors'),
 		backgroundImage: {
 			none: 'none',
