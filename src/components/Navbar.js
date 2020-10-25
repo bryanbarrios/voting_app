@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 import logo from '../assets/images/logos/logo.svg';
 import compactLogo from '../assets/images/logos/compact-logo.svg';
@@ -74,41 +75,43 @@ export const Navbar = () => {
 						</div>
 						<div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
 							<div className="flex-shrink-0">
-								<img
-									className="block w-auto h-8 sm:hidden"
-									src={compactLogo}
-									alt="VoteNow logo"
-								/>
-								<img
-									className="hidden w-auto h-8 sm:block"
-									src={logo}
-									alt="VoteNow logo"
-								/>
+								<Link to="/">
+									<img
+										className="block w-auto h-8 sm:hidden"
+										src={compactLogo}
+										alt="VoteNow logo"
+									/>
+									<img
+										className="hidden w-auto h-8 sm:block"
+										src={logo}
+										alt="VoteNow logo"
+									/>
+								</Link>
 							</div>
 							<div className="hidden sm:block sm:ml-6">
 								<div className="flex">
-									<a
-										href="/"
+									<NavLink
+										to="/"
 										className="px-2 py-2 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in rounded-md focus:outline-none hover:text-gray-500"
 									>
 										Inicio
-									</a>
-									<a
-										href="/"
+									</NavLink>
+									<NavLink
+										to="/elections"
 										className="px-2 py-2 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in rounded-md focus:outline-none hover:text-gray-500"
 									>
 										Elecciones
-									</a>
+									</NavLink>
 								</div>
 							</div>
 						</div>
 						<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-							<a
-								href="/"
+							<NavLink
+								to="/login"
 								className="text-sm font-semibold leading-5 text-gray-600 transition duration-150 ease-in rounded-md focus:outline-none hover:text-gray-500"
 							>
 								Iniciar sesión
-							</a>
+							</NavLink>
 						</div>
 					</div>
 				</div>
@@ -118,18 +121,18 @@ export const Navbar = () => {
 					})}
 				>
 					<div className="px-2 pt-2 pb-3">
-						<a
-							href="/"
+						<NavLink
+							to="/"
 							className="block px-3 py-2 text-base font-medium text-gray-600 transition duration-150 ease-in-out rounded-md focus:outline-none"
 						>
 							Inicio
-						</a>
-						<a
-							href="/"
+						</NavLink>
+						<NavLink
+							to="/elections"
 							className="block px-3 py-2 mt-1 text-base font-medium text-gray-600 transition duration-150 ease-in-out rounded-md focus:outline-none"
 						>
 							Elecciones
-						</a>
+						</NavLink>
 					</div>
 				</div>
 			</nav>

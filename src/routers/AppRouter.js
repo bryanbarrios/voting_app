@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { PublicRoute } from './PublicRoute';
-import { PrivateRoute } from './PrivateRoute';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { PublicRoute } from '../components/PublicRoute';
+import { PrivateRoute } from '../components/PrivateRoute';
 import { Navbar } from '../components/Navbar';
+import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { ElectionsScreen } from '../screens/ElectionsScreen';
-import { LoginScreen } from '../screens/LoginScreen';
 import { DashboardRoutes } from './DashboardRoutes';
+import { NotFoundScreen } from '../screens/NotFoundScreen';
 
 export const AppRouter = () => {
 	return (
@@ -40,6 +41,7 @@ export const AppRouter = () => {
 						isAuthenticated={true}
 						component={DashboardRoutes}
 					/>
+					<Route path="*" component={NotFoundScreen} />
 				</Switch>
 			</div>
 		</Router>

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 export const PublicRoute = ({
 	isAuthenticated,
 	restricted,
-	component: Component
+	component: Component,
+	...rest
 }) => {
 	return (
 		<Route

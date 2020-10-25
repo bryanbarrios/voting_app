@@ -4,13 +4,10 @@ import { DashboardScreen } from '../screens/DashboardScreen';
 
 export const DashboardRoutes = () => {
 	return (
-		<>
-			<Navbar />
-			<div>
-				<Switch>
-					<Route exact path="/dashboard" component={DashboardScreen} />
-				</Switch>
-			</div>
-		</>
+		<div>
+			<Switch>
+				<Route exact path="/dashboard" component={DashboardScreen} />
+			</Switch>
+		</div>
 	);
 };
