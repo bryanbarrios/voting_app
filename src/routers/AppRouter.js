@@ -19,7 +19,7 @@ export const AppRouter = () => {
 						exact
 						path="/"
 						isAuthenticated={false}
-						restricted={false}
+						restrict-ed={false}
 						component={HomeScreen}
 					/>
 					<PublicRoute
