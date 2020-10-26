@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { withNavbar } from '../components/hoc/withNavbar';
 
-export const ElectionsScreen = () => {
+const ElectionsScreen = () => {
 	return (
 		<div>
 			<p>Elections Screen</p>
 		</div>
-	)
-}
+	);
+};
+
+export default withNavbar(ElectionsScreen)
