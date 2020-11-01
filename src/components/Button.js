@@ -16,7 +16,7 @@ export const Button = ({
 			className={cx(
 				'py-2 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
 				{
-					'border-solid border-2 border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600':
+					'border-solid border	-2 border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600':
 						variant === 'outline' && variantColor === 'primary',
 					'border-solid border-2 border-secondary-500 text-secondary-500 hover:border-secondary-600 hover:text-secondary-600':
 						variant === 'outline' && variantColor === 'secondary',

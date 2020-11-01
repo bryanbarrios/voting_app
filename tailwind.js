@@ -38,6 +38,9 @@ module.exports = {
 				800: '#3973a2',
 				900: '#31628b',
 			},
+
+			dashboard: '#EDF1F7',
+
 			transparent: 'transparent',
 			current: 'currentColor',
 
