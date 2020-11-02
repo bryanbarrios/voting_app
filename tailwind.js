@@ -343,6 +343,7 @@ module.exports = {
 		inset: {
 			0: '0',
 			auto: 'auto',
+			'-16': '-16rem',
 		},
 		letterSpacing: {
 			tighter: '-0.05em',

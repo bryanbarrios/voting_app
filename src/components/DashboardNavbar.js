@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
 
-export const DashboardNavbar = ({ onChange }) => {
+export const DashboardNavbar = ({children, isOpen}) => {
 	const [navbarOpen, setNavbarOpen] = useState(true);
 
-	onChange(navbarOpen)
+	isOpen = navbarOpen
 
 	return (
 		<>
@@ -50,6 +50,7 @@ export const DashboardNavbar = ({ onChange }) => {
 					</div>
 				</div>
 			</nav>
+			{children}
 		</>
 	);
 };
