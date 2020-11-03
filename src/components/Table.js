@@ -1,14 +1,70 @@
-import React from 'react';
-import { useTable } from 'react-table';
+import React, { useState, useEffect } from 'react';
+import { useTable, useRowSelect, usePagination } from 'react-table';
+import { useTablePagination } from '../hooks/useTablePagination';
+import { client } from '../utils/api-client';
+import { IndeterminateCheckbox } from './IndeterminateCheckbox';
 
-export const Table = ({ columns, data }) => {
+export const Table = ({ columns, path }) => {
+	const [controlledPageCount, setControlledPageCount] = useState(0);
+	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState([]);
+
 	const {
 		getTableProps,
 		getTableBodyProps,
 		headerGroups,
-		rows,
+		page,
 		prepareRow,
-	} = useTable({ columns, data });
+		canPreviousPage,
+		canNextPage,
+		pageOptions,
+		pageCount,
+		gotoPage,
+		nextPage,
+		previousPage,
+		setPageSize,
+		selectedFlatRows,
+		state: { pageIndex, pageSize },
+	} = useTable(
+		{
+			columns,
+			data,
+			initialState: { pageIndex: 0 },
+			manualPagination: true,
+			pageCount: controlledPageCount,
+		},
+		usePagination,
+		useRowSelect,
+		(hooks) => {
+			hooks.visibleColumns.push((columns) => [
+				{
+					id: 'selection',
+					Header: ({ getToggleAllPageRowsSelectedProps }) => (
+						<div>
+							<IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+						</div>
+					),
+					Cell: ({ row }) => (
+						<div>
+							<IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+						</div>
+					),
+				},
+				...columns,
+			]);
+		}
+	);
+
+	useEffect(() => {
+		client(`${path}?page=${pageIndex + 1}&records=${pageSize}`).then(
+			(response) => {
+				setData(response.results);
+				setControlledPageCount(response.totalPages);
+				setLoading(false);
+			}
+		);
+		setLoading(true);
+	}, [client, path, pageIndex, pageSize]);
 
 	return (
 		<>
@@ -38,16 +94,17 @@ export const Table = ({ columns, data }) => {
 									className="bg-white divide-y divide-gray-200"
 									{...getTableBodyProps}
 								>
-									{rows.map(row => {
+									{page.map((row, i) => {
 										prepareRow(row);
 										return (
 											<tr {...row.getRowProps()}>
-												{row.cells.map(cell => {
+												{row.cells.map((cell) => {
 													return (
-														<td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700" {...cell.getCellProps()}>
-															{
-																cell.render('Cell')
-															}
+														<td
+															className="px-6 py-3 whitespace-no-wrap text-sm leading-5 text-gray-700"
+															{...cell.getCellProps()}
+														>
+															{cell.render('Cell')}
 														</td>
 													);
 												})}
@@ -60,6 +117,77 @@ export const Table = ({ columns, data }) => {
 					</div>
 				</div>
 			</div>
+			<div className="pagination m-2">
+				<button
+					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
+					onClick={() => gotoPage(0)}
+					disabled={!canPreviousPage}
+				>
+					Primera página
+				</button>
+				<button
+					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
+					onClick={() => previousPage()}
+					disabled={!canPreviousPage}
+				>
+					Anterior
+				</button>
+				<button
+					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
+					onClick={() => nextPage()}
+					disabled={!canNextPage}
+				>
+					Siguiente
+				</button>
+				<button
+					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
+					onClick={() => gotoPage(pageCount - 1)}
+					disabled={!canNextPage}
+				>
+					Última página
+				</button>
+				<span className="p-2 m-1">
+					Página {' '}
+					<strong>
+						{pageIndex + 1} de {pageOptions.length}
+					</strong>
+				</span>
+				<select
+					className="p-1 rounded-md bg-gray-100"
+					value={pageSize}
+					onChange={(e) => {
+						setPageSize(Number(e.target.value));
+					}}
+				>
+					{[10, 20, 30, 40, 50].map((pageSize) => (
+						<option key={pageSize} value={pageSize}>
+							Mostrar {pageSize} resultados por página
+						</option>
+					))}
+				</select>
+				{loading && <p>Cargando...</p>}
+				{console.log(loading)}
+			</div>
+			<pre className="py-3">
+				<code>
+					{JSON.stringify(
+						{
+							ids: selectedFlatRows.map((d) => d.original.id),
+						},
+						null,
+						2
+					)}
+				</code>
+				<code>
+					{JSON.stringify(
+						{
+							objects: selectedFlatRows.map((d) => d.original),
+						},
+						null,
+						2
+					)}
+				</code>
+			</pre>
 		</>
 	);
 };
