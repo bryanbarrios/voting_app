@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useTable, useRowSelect, usePagination } from 'react-table';
-import { useTablePagination } from '../hooks/useTablePagination';
+import {
+	useTable,
+	useRowSelect,
+	usePagination,
+	useGlobalFilter,
+} from 'react-table';
 import { client } from '../utils/api-client';
+import { GlobalFilter } from './GlobalFilter';
 import { IndeterminateCheckbox } from './IndeterminateCheckbox';
 
 export const Table = ({ columns, path }) => {
@@ -24,7 +29,9 @@ export const Table = ({ columns, path }) => {
 		previousPage,
 		setPageSize,
 		selectedFlatRows,
-		state: { pageIndex, pageSize },
+		preGlobalFilteredRows,
+		setGlobalFilter,
+		state: { pageIndex, pageSize, globalFilter },
 	} = useTable(
 		{
 			columns,
@@ -32,7 +39,10 @@ export const Table = ({ columns, path }) => {
 			initialState: { pageIndex: 0 },
 			manualPagination: true,
 			pageCount: controlledPageCount,
+			autoResetPage: false,
+			autoResetFilters: false,
 		},
+		useGlobalFilter,
 		usePagination,
 		useRowSelect,
 		(hooks) => {
@@ -64,11 +74,18 @@ export const Table = ({ columns, path }) => {
 			}
 		);
 		setLoading(true);
-	}, [client, path, pageIndex, pageSize]);
+	}, [path, pageIndex, pageSize]);
 
 	return (
 		<>
-			<div className="flex flex-col">
+			<div className="flex flex-col m-4">
+				<div className="my-4">
+					<GlobalFilter
+						preGlobalFilteredRows={preGlobalFilteredRows}
+						globalFilter={globalFilter}
+						setGlobalFilter={setGlobalFilter}
+					/>
+				</div>
 				<div className="overflow-x-auto">
 					<div className="align-middle inline-block min-w-full">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -147,7 +164,7 @@ export const Table = ({ columns, path }) => {
 					Última página
 				</button>
 				<span className="p-2 m-1">
-					Página {' '}
+					Página{' '}
 					<strong>
 						{pageIndex + 1} de {pageOptions.length}
 					</strong>
@@ -166,7 +183,6 @@ export const Table = ({ columns, path }) => {
 					))}
 				</select>
 				{loading && <p>Cargando...</p>}
-				{console.log(loading)}
 			</div>
 			<pre className="py-3">
 				<code>
