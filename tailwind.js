@@ -123,6 +123,8 @@ module.exports = {
 				700: '#2b6cb0',
 				800: '#2c5282',
 				900: '#2a4365',
+				pacific: '#0791E6',
+				pattens: '#F7FAFC',
 			},
 			indigo: {
 				100: '#ebf4ff',
@@ -234,7 +236,9 @@ module.exports = {
 		borderWidth: {
 			default: '1px',
 			0: '0',
+			1: '1px',
 			2: '2px',
+			3: '3px',
 			4: '4px',
 			8: '8px',
 		},

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Button } from '../components/Button';
 import { Table } from '../components/Table';
 
 export const UsersScreen = () => {
@@ -32,6 +33,8 @@ export const UsersScreen = () => {
 
 	return (
 		<div>
+			<h1 className='font-semibold text-xl text-gray-800'>Gestión de Usuarios</h1>
+			<Button text="Registrar usuario" variantColor='secondary' />
 			<Table columns={columns} path={USER_ENDPOINT} />
 		</div>
 	);

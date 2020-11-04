@@ -8,6 +8,8 @@ import {
 import { client } from '../utils/api-client';
 import { GlobalFilter } from './GlobalFilter';
 import { IndeterminateCheckbox } from './IndeterminateCheckbox';
+import { Pagination } from './Pagination';
+import { Spinner } from './Spinner';
 
 export const Table = ({ columns, path }) => {
 	const [controlledPageCount, setControlledPageCount] = useState(0);
@@ -78,14 +80,31 @@ export const Table = ({ columns, path }) => {
 
 	return (
 		<>
-			<div className="flex flex-col m-4">
-				<div className="my-4">
+			<div className="flex flex-col">
+				<div>
 					<GlobalFilter
 						preGlobalFilteredRows={preGlobalFilteredRows}
 						globalFilter={globalFilter}
 						setGlobalFilter={setGlobalFilter}
 					/>
 				</div>
+				<div>
+					<Pagination
+						firstPage={() => gotoPage(0)}
+						previousPage={() => previousPage()}
+						canPreviousPage={!canPreviousPage}
+						nextPage={() => nextPage()}
+						canNextPage={!canNextPage}
+						pageIndex={pageIndex + 1}
+						pageSize={pageSize}
+						setPageSize={(e) => {
+							setPageSize(Number(e.target.value));
+						}}
+						totalPages={pageOptions.length}
+						lastPage={() => gotoPage(pageCount - 1)}
+					/>
+				</div>
+				<div>{loading && <Spinner />}</div>
 				<div className="overflow-x-auto">
 					<div className="align-middle inline-block min-w-full">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -114,7 +133,10 @@ export const Table = ({ columns, path }) => {
 									{page.map((row, i) => {
 										prepareRow(row);
 										return (
-											<tr {...row.getRowProps()}>
+											<tr
+												{...row.getRowProps()}
+												className="hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer"
+											>
 												{row.cells.map((cell) => {
 													return (
 														<td
@@ -133,56 +155,6 @@ export const Table = ({ columns, path }) => {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className="pagination m-2">
-				<button
-					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
-					onClick={() => gotoPage(0)}
-					disabled={!canPreviousPage}
-				>
-					Primera página
-				</button>
-				<button
-					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
-					onClick={() => previousPage()}
-					disabled={!canPreviousPage}
-				>
-					Anterior
-				</button>
-				<button
-					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
-					onClick={() => nextPage()}
-					disabled={!canNextPage}
-				>
-					Siguiente
-				</button>
-				<button
-					className="bg-secondary-500 text-white text-sm rounded-md p-2 m-1"
-					onClick={() => gotoPage(pageCount - 1)}
-					disabled={!canNextPage}
-				>
-					Última página
-				</button>
-				<span className="p-2 m-1">
-					Página{' '}
-					<strong>
-						{pageIndex + 1} de {pageOptions.length}
-					</strong>
-				</span>
-				<select
-					className="p-1 rounded-md bg-gray-100"
-					value={pageSize}
-					onChange={(e) => {
-						setPageSize(Number(e.target.value));
-					}}
-				>
-					{[10, 20, 30, 40, 50].map((pageSize) => (
-						<option key={pageSize} value={pageSize}>
-							Mostrar {pageSize} resultados por página
-						</option>
-					))}
-				</select>
-				{loading && <p>Cargando...</p>}
 			</div>
 			<pre className="py-3">
 				<code>
