@@ -8,7 +8,7 @@ export const Sidebar = () => {
 
 	return (
 		<aside
-			className="bg-white w-64 min-h-screen lg:w-1/5 p-3 flex"
+			className="bg-white w-64 min-h-screen lg:w-1/4 p-3 flex"
 		>
 			<div className="flex flex-col w-full">
 				<Link

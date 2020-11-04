@@ -25,7 +25,7 @@ export const DashboardBaseLayout = ({ children }) => {
 						enter="transition ease-in duration-700"
 						leave="transition ease-out duration-500"
 					>
-						<div className="container overflow-hidden p-6">{children}</div>
+						<div className="w-full overflow-hidden p-6">{children}</div>
 					</Transition>
 				</div>
 			</DashboardNavbar>

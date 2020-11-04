@@ -12,7 +12,7 @@ export const GlobalFilter = ({
 		setGlobalFilter(value || undefined);
 	}, 200);
 	return (
-		<div className="inline-flex bg-white rounded-lg p-2 shadow">
+		<div className="inline-flex bg-white rounded-lg p-2 shadow-md">
 			<span className="text-sm flex items-center justify-center pr-1 text-gray-500">
 				<svg
 					className="w-5 h-5"
