@@ -9,7 +9,7 @@ export const DashboardNavbar = ({children, isOpen}) => {
 
 	return (
 		<>
-			<nav className="bg-white w-full sticky top-0">
+			<nav className="bg-white w-full sticky top-0 border-b">
 				<div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-4">
 					<div className="relative flex items-center justify-between h-16">
 						<div className="flex items-center">
