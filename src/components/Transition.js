@@ -84,7 +84,7 @@ function Transition({ show, appear, ...rest }) {
 				show={parent.show}
 				{...rest}
 			/>
-		);
+		);	
 	}
 
 	return (
