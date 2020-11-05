@@ -103,7 +103,7 @@ export const Sidebar = () => {
 						></path>
 					</svg>
 				</SidebarDropdown>
-				<SidebarItem text="Estadísticas" to="/dashboard//statistics">
+				<SidebarItem text="Estadísticas" to="/dashboard/statistics">
 					<svg
 						className="w-6 h-6"
 						fill="none"
