@@ -1,6 +1,5 @@
-import React from 'react'
 import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
-import { useRef, useEffect, useContext, createContext } from 'react';
+import React, { useRef, useEffect, useContext, createContext } from 'react';
 
 const TransitionContext = createContext({ parent: {} });
 
@@ -84,7 +83,7 @@ function Transition({ show, appear, ...rest }) {
 				show={parent.show}
 				{...rest}
 			/>
-		);	
+		);
 	}
 
 	return (

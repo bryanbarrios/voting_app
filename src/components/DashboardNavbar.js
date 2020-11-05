@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
 
-export const DashboardNavbar = ({children, isOpen}) => {
+export const DashboardNavbar = ({ children, isOpen }) => {
 	const [navbarOpen, setNavbarOpen] = useState(true);
 
-	isOpen = navbarOpen
+	useEffect(() => {
+		isOpen(navbarOpen);
+	}, [isOpen, navbarOpen]);
 
 	return (
 		<>
-			<nav className="bg-white w-full sticky top-0 border-b">
-				<div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-4">
+			<nav
+				className={cx('bg-white w-full border-b', {
+					'sticky top-0 z-50': !navbarOpen,
+				})}
+			>
+				<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-4">
 					<div className="relative flex items-center justify-between h-16">
 						<div className="flex items-center">
 							<button
@@ -37,7 +44,7 @@ export const DashboardNavbar = ({children, isOpen}) => {
 						</div>
 						<div className="flex items-center flex-1 sm:items-stretch sm:justify-start">
 							<div className="flex-shrink-0">
-								<Link to="/">
+								<Link to="/dashboard">
 									<img className="w-auto h-8" src={logo} alt="VoteNow logo" />
 								</Link>
 							</div>

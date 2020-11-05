@@ -3,10 +3,6 @@ import { SidebarDropdown } from './SidebarDropdown';
 import { SidebarItem } from './SidebarItem';
 
 export const Sidebar = () => {
-	const styles = {
-		height: 'calc(100vh - 64px)',
-	};
-
 	const candidateDropdownItems = [
 		{
 			key: 1,
@@ -34,7 +30,7 @@ export const Sidebar = () => {
 	];
 
 	return (
-		<aside className="bg-white w-64 min-h-screen lg:w-1/4 p-3 flex">
+		<aside className="bg-white min-w-full md:w-1/3 lg:w-1/4 md:min-w-0 sm:min-w-full p-3 flex min-h-screen sticky top-0 self-start">
 			<div className="flex flex-col w-full">
 				<SidebarItem text="Usuarios" to="/dashboard/users">
 					<svg

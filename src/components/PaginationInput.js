@@ -3,7 +3,7 @@ import React from 'react';
 export const PaginationInput = ({ pageSize, onChange }) => {
 	return (
 		<select
-			className="h-full w-auto px-2 mx-1 bg-blue-pattens rounded-lg font-semibold text-sm text-blue-pacific appearance-none cursor-pointer focus:outline-none"
+			className="h-full w-full lg:w-auto sm:w-full px-2 mx-1 bg-blue-pattens rounded-lg font-semibold text-sm text-blue-pacific appearance-none cursor-pointer focus:outline-none"
 			value={pageSize}
 			onChange={onChange}
 		>

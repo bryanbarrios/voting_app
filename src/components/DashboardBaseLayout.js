@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import cx from 'classnames';
 import { DashboardNavbar } from './DashboardNavbar';
 import { Sidebar } from './Sidebar';
 import Transition from './Transition';
 
 export const DashboardBaseLayout = ({ children }) => {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	return (
 		<div className="bg-dashboard min-h-screen">
-			<DashboardNavbar>
+			<DashboardNavbar isOpen={setIsSidebarOpen}>
 				<div className="flex">
 					<Transition
 						show={isSidebarOpen}
@@ -20,13 +21,13 @@ export const DashboardBaseLayout = ({ children }) => {
 					>
 						<Sidebar />
 					</Transition>
-					<Transition
-						show={isSidebarOpen}
-						enter="transition ease-in duration-700"
-						leave="transition ease-out duration-500"
+					<div
+						className={cx('w-full overflow-hidden p-4 lg:p-6 sm:p-4 md:block', {
+							hidden: isSidebarOpen,
+						})}
 					>
-						<div className="w-full overflow-hidden p-6">{children}</div>
-					</Transition>
+						{children}
+					</div>
 				</div>
 			</DashboardNavbar>
 		</div>
