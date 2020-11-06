@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
+import Transition from './Transition';
 
-export const DashboardNavbar = ({ children, isOpen }) => {
+export const DashboardNavbar = ({ isOpen }) => {
 	const [navbarOpen, setNavbarOpen] = useState(true);
 
 	useEffect(() => {
@@ -12,14 +12,10 @@ export const DashboardNavbar = ({ children, isOpen }) => {
 
 	return (
 		<>
-			<nav
-				className={cx('bg-white w-full border-b', {
-					'sticky top-0 z-50': !navbarOpen,
-				})}
-			>
+			<nav className="bg-white w-full border-l-1 sticky top-0 z-50">
 				<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-4">
 					<div className="relative flex items-center justify-between h-16">
-						<div className="flex items-center">
+						<div className="flex items-center z-50">
 							<button
 								className="p-2 text-gray-500 duration-150 ease-in-out rounded-md focus:outline-none"
 								aria-label="Main menu"
@@ -42,13 +38,23 @@ export const DashboardNavbar = ({ children, isOpen }) => {
 								</svg>
 							</button>
 						</div>
-						<div className="flex items-center flex-1 sm:items-stretch sm:justify-start">
-							<div className="flex-shrink-0">
-								<Link to="/dashboard">
-									<img className="w-auto h-8" src={logo} alt="VoteNow logo" />
-								</Link>
+						<Transition
+							show={!navbarOpen}
+							enter="transition ease-out duration-500"
+							enterFrom="transform opacity-0 scale-95"
+							enterTo="transform opacity-100 scale-100"
+							leave="transition ease-in duration-200"
+							leaveFrom="transform opacity-100 scale-100"
+							leaveTo="transform opacity-0 scale-95"
+						>
+							<div className="flex items-center flex-1 sm:items-stretch sm:justify-start">
+								<div className="flex-shrink-0">
+									<Link to="/dashboard">
+										<img className="w-auto h-8" src={logo} alt="VoteNow logo" />
+									</Link>
+								</div>
 							</div>
-						</div>
+						</Transition>
 						<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 							<p className="text-sm font-semibold leading-5 text-gray-600 transition duration-150 ease-in hover:text-gray-500 cursor-pointer">
 								Administrador
@@ -57,7 +63,6 @@ export const DashboardNavbar = ({ children, isOpen }) => {
 					</div>
 				</div>
 			</nav>
-			{children}
 		</>
 	);
 };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 import { SidebarDropdownItem } from './SidebarDropdownItem';
 import cx from 'classnames';
 import Transition from './Transition';
 
-export const SidebarDropdown = ({ text, items = [], children }) => {
+const SidebarDropdown = ({ text, items = [], children, history }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef(null);
 
@@ -16,11 +17,17 @@ export const SidebarDropdown = ({ text, items = [], children }) => {
 				setIsOpen(false);
 			}
 		};
+
+		let unlisten = history.listen(() => {
+			setIsOpen(false);
+		});
+
 		document.addEventListener('click', handleClick);
 		return () => {
 			document.removeEventListener('click', handleClick);
+			unlisten();
 		};
-	}, [isOpen]);
+	}, [isOpen, history]);
 
 	return (
 		<>
@@ -88,3 +95,5 @@ export const SidebarDropdown = ({ text, items = [], children }) => {
 		</>
 	);
 };
+
+export default withRouter(SidebarDropdown);
