@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
 import Transition from './Transition';
+import { isMobile } from 'react-device-detect';
 
-export const DashboardNavbar = ({ isOpen }) => {
-	const [navbarOpen, setNavbarOpen] = useState(true);
+const DashboardNavbar = ({ isOpen, history }) => {
+	const [navbarOpen, setNavbarOpen] = useState(!isMobile);
+
+	useEffect(() => {
+		let unlisten = history.listen(() => {
+			setNavbarOpen(!isMobile);
+		});
+		return () => {
+			unlisten();
+		};
+	}, [history]);
 
 	useEffect(() => {
 		isOpen(navbarOpen);
@@ -66,3 +76,5 @@ export const DashboardNavbar = ({ isOpen }) => {
 		</>
 	);
 };
+
+export default withRouter(DashboardNavbar);

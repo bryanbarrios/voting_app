@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { DashboardNavbar } from './DashboardNavbar';
+import DashboardNavbar  from './DashboardNavbar';
 import { Sidebar } from './Sidebar';
 import Transition from './Transition';
 
 export const DashboardBaseLayout = ({ children }) => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 	return (
 		<div className="bg-dashboard flex min-h-screen">
 			<Transition
