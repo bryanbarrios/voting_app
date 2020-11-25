@@ -1,8 +1,10 @@
 import React from 'react';
+import { Input } from './Input';
 
-export const FormikControl = ({ control }) => {
+export const FormikControl = ({ control, ...rest }) => {
 	switch (control) {
 		case 'input':
+			return <Input {...rest} />;
 		case 'textarea':
 		case 'select':
 		case 'radio':
