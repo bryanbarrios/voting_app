@@ -10,11 +10,11 @@ module.exports = {
 					'variants',
 					'responsive',
 					'screen',
-					'layer'
+					'layer',
 				],
 			},
 		],
-		'at-rule-empty-line-before': 	'never',
+		'at-rule-empty-line-before': 'never',
 		indentation: 'tab',
 		'declaration-block-trailing-semicolon': null,
 		'no-descending-specificity': null,

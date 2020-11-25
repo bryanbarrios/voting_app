@@ -26,4 +26,37 @@
 	}
 }
 @tailwind components;
+@layer components {
+	.card__container {
+		width: 280px;
+		@apply h-auto shadow-md p-3 m-4 flex flex-col justify-between rounded-lg;
+	}
+
+	.card__image__container {
+		@apply flex justify-center flex-wrap flex-row;
+	}
+
+	.card__image__figure {
+		width: 100%;
+		height: 180px;
+	}
+
+	.card__image {
+		width: inherit;
+		height: inherit;
+		@apply object-cover rounded-lg;
+	}
+
+	.card__image__caption {
+		@apply text-xs text-gray-600 font-medium;
+	}
+
+	.card__body__label {
+		@apply font-semibold text-xs text-black;
+	}
+
+	.card__body__text {
+		@apply font-bold text-xl;
+	}
+}
 @tailwind utilities;
