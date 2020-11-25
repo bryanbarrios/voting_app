@@ -1,32 +1,29 @@
 @tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
 @layer base {
-  @font-face {
-    font-family: Inter;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Regular.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 500;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Medium.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 600;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-SemiBold.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Bold.woff2) format('woff2');
-  }
+	@font-face {
+		font-family: Inter;
+		font-weight: 400;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Regular.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 500;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Medium.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 600;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-SemiBold.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 700;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Bold.woff2) format('woff2');
+	}
 }
+@tailwind components;
+@tailwind utilities;
