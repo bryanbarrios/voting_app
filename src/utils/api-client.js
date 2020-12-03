@@ -1,3 +1,5 @@
+import { logout } from '../auth_provider';
+
 const apiURL = process.env.REACT_APP_API_URL;
 
 async function client(
@@ -19,8 +21,7 @@ async function client(
 		.fetch(`${apiURL}/${endpoint}`, config)
 		.then(async (response) => {
 			if (response.status === 401) {
-				// Here the function to logout and clear cache (WIP)
-				// refresh the page
+				logout();
 				window.location.assign(window.location);
 				return Promise.reject({
 					message: 'Por favor, inicie sesión nuevamente.',
