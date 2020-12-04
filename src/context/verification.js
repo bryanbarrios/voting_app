@@ -48,7 +48,7 @@ const useVerification = () => {
 	const logout = useCallback(() => {
 		auth.logout();
 		setUser(null);
-	});
+	}, [setUser]);
 
 	useEffect(() => {
 		if (token !== null) {
@@ -62,7 +62,7 @@ const useVerification = () => {
 		isLoading,
 		hasErrors,
 		user,
-		logout
+		logout,
 	};
 };
 

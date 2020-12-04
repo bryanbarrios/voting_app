@@ -9,9 +9,9 @@ export const Navbar = () => {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	const [atTopOfPage, setAtTopOfPage] = useState(false);
 
-	const { user } = useVerification()
+	const { user } = useVerification();
 
-	console.log(user)
+	console.log(user);
 
 	useEffect(() => {
 		const handleScroll = () => {

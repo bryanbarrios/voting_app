@@ -20,6 +20,7 @@ function handleTokenResponse(data) {
 
 	if (attempts === 0) {
 		removeAuthenticationId();
+		window.location.assign(window.location);
 		throw new Error('Ha superado la cantidad máxima de intentos permitidos.');
 	}
 
