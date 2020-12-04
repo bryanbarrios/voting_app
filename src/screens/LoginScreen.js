@@ -94,7 +94,11 @@ export const LoginScreen = ({ history }) => {
 					leaveFrom="transform opacity-100 scale-300"
 					leaveTo="transform opacity-0 scale-95"
 				>
-					<ErrorNotification />
+					<ErrorNotification>
+						{
+							'Ha ocurrido un error, verifique los datos introducidos e inténtelo nuevamente.'
+						}
+					</ErrorNotification>
 				</Transition>
 			</div>
 		</div>

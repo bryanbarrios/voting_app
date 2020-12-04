@@ -22,9 +22,13 @@ async function client(
 		.then(async (response) => {
 			if (response.status === 401) {
 				logout();
-				window.location.assign(window.location);
 				return Promise.reject({
 					message: 'Por favor, inicie sesión nuevamente.',
+				});
+			}
+			if (response.status === 404) {
+				return Promise.reject({
+					message: 'No encontrado.',
 				});
 			}
 			const data = await response.json();

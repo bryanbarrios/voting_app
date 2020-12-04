@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import cx from 'classnames';
 
-export const Note = ({ children }) => {
+export const Note = ({ children, seconds }) => {
+	const [hidden, setHidden] = useState(false);
+
+	setTimeout(() => setHidden(true), seconds * 1000);
+
 	return (
-		<div className="w-full my-1 p-4 space-y-2 flex items-center flex-col text-gray-600 bg-gray-100 rounded-lg">
+		<div
+			className={cx(
+				'w-full my-1 p-4 space-y-2 flex items-center flex-col text-gray-600 bg-gray-100 rounded-lg',
+				{ hidden: hidden }
+			)}
+		>
 			<span>
 				<svg
 					className="w-6 h-6"

@@ -5,7 +5,9 @@ const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext';
 
 const AuthContextProvider = ({ children }) => {
-	const [authenticationId, setAuthenticationId] = useState(null);
+	const [authenticationId, setAuthenticationId] = useState(
+		auth.getAuthenticationId()
+	);
 
 	return (
 		<AuthContext.Provider value={{ authenticationId, setAuthenticationId }}>
@@ -14,12 +16,12 @@ const AuthContextProvider = ({ children }) => {
 	);
 };
 
-const useAuth = () => {
+const useAuth = () => {	
 	const { authenticationId, setAuthenticationId } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasErrors, setHasErrors] = useState(false);
 
-	const login = useCallback(
+	const login =	 useCallback(
 		(data) => {
 			setIsLoading(true);
 			auth
@@ -41,6 +43,7 @@ const useAuth = () => {
 		login,
 		isLoading,
 		hasErrors,
+		authenticationId
 	};
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ErrorNotification = () => {
+export const ErrorNotification = ({ children }) => {
 	return (
 		<div className="w-full my-1 p-4 space-y-2 flex items-center flex-col text-red-500 bg-red-100 rounded-lg">
 			<span>
@@ -19,10 +19,7 @@ export const ErrorNotification = () => {
 					></path>
 				</svg>
 			</span>
-			<p className="text-sm text-center font-medium">
-				Ha ocurrido un error, verifique los datos introducidos e inténtelo
-				nuevamente.
-			</p>
+			<p className="text-sm text-center font-medium">{children}</p>
 		</div>
 	);
 };

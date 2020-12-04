@@ -1,18 +1,33 @@
 import { client } from './utils/api-client';
 
-const token = '__auth_token__';
-const authentication_id = '__authentication_id__';
+const TOKEN_KEY = '__auth_token__';
+const AUTHENTICATION_KEY = '__authentication_id__';
 
-async function getToken() {
-	return JSON.parse(window.localStorage.getItem(token));
+function getToken() {
+	return JSON.parse(window.localStorage.getItem(TOKEN_KEY));
 }
 
-async function getAuthenticationId() {
-	return JSON.parse(window.localStorage.getItem(authentication_id));
+function getAuthenticationId() {
+	return JSON.parse(window.localStorage.getItem(AUTHENTICATION_KEY));
+}
+
+function removeAuthenticationId() {
+	window.localStorage.removeItem(AUTHENTICATION_KEY);
 }
 
 function handleTokenResponse(data) {
-	window.localStorage.setItem(token, JSON.stringify(data));
+	const { token, attempts, validated } = data;
+
+	if (attempts === 0) {
+		removeAuthenticationId();
+		throw new Error('Ha superado la cantidad máxima de intentos permitidos.');
+	}
+
+	if (validated === false) {
+		throw new Error('Ingrese el código de verificación correctamente.');
+	}
+
+	window.localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
 	return data;
 }
 
@@ -21,7 +36,7 @@ function handleOtpResponse(data) {
 	if (id === 0 && userId === 0) {
 		throw new Error('Credenciales inválidas');
 	} else {
-		window.localStorage.setItem(authentication_id, JSON.stringify(data));
+		window.localStorage.setItem(AUTHENTICATION_KEY, JSON.stringify(data));
 	}
 	return data;
 }
@@ -35,7 +50,14 @@ function verification(data) {
 }
 
 async function logout() {
-	window.localStorage.removeItem(token);
+	window.localStorage.removeItem(TOKEN_KEY);
 }
 
-export { getToken, getAuthenticationId, login, verification, logout };
+export {
+	getToken,
+	getAuthenticationId,
+	removeAuthenticationId,
+	login,
+	verification,
+	logout,
+};
