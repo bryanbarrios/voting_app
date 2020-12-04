@@ -1,6 +1,12 @@
 @tailwind base;
 
 @tailwind components;
+@layer components {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    @apply appearance-none m-0
+  }
+}
 
 @tailwind utilities;
 

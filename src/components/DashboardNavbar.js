@@ -3,9 +3,12 @@ import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
 import Transition from './Transition';
 import { isMobile } from 'react-device-detect';
+import UserDropdown from './UserDropdown';
+import { useVerification } from '../context/verification';
 
 const DashboardNavbar = ({ isOpen, history }) => {
 	const [navbarOpen, setNavbarOpen] = useState(!isMobile);
+	const { user } = useVerification();
 
 	useEffect(() => {
 		let unlisten = history.listen(() => {
@@ -66,9 +69,9 @@ const DashboardNavbar = ({ isOpen, history }) => {
 							</div>
 						</Transition>
 						<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-							<p className="text-sm font-semibold leading-5 text-gray-600 transition duration-150 ease-in hover:text-gray-500 cursor-pointer">
-								Administrador
-							</p>
+							{user !== null && (
+								<UserDropdown email={user.email} rol={user.rol} />
+							)}
 						</div>
 					</div>
 				</div>

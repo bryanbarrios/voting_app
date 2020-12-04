@@ -1,35 +1,9 @@
 import React from 'react';
-import SidebarDropdown from './SidebarDropdown';
 import { SidebarItem } from './SidebarItem';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logos/logo.svg';
 
 export const Sidebar = () => {
-	const candidateDropdownItems = [
-		{
-			key: 1,
-			text: 'Presidencia',
-			to: '/dashboard/candidates/presidential-candidates',
-		},
-		{
-			key: 2,
-			text: 'Municipalidad',
-			to: '/dashboard/candidates/municipal-candidates',
-		},
-	];
-
-	const votingDropdownItems = [
-		{
-			key: 1,
-			text: 'Presidenciales',
-			to: '/dashboard/voting/presidential-voting',
-		},
-		{
-			key: 2,
-			text: 'Municipales',
-			to: '/dashboard/voting/municipal-voting',
-		},
-	];
 
 	return (
 		<aside className="bg-white h-screen absolute w-full lg:sticky lg:w-1/4 top-0 flex min-h-screen">
@@ -58,7 +32,7 @@ export const Sidebar = () => {
 							></path>
 						</svg>
 					</SidebarItem>
-					<SidebarDropdown text="Candidatos" items={candidateDropdownItems}>
+					<SidebarItem text="Candidatos" to="/dashboard/candidates">
 						<svg
 							className="w-6 h-6"
 							fill="none"
@@ -73,7 +47,7 @@ export const Sidebar = () => {
 								d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
 							></path>
 						</svg>
-					</SidebarDropdown>
+					</SidebarItem>
 					<SidebarItem
 						text="Partidos Políticos"
 						to="/dashboard/political-parties"
@@ -93,7 +67,7 @@ export const Sidebar = () => {
 							></path>
 						</svg>
 					</SidebarItem>
-					<SidebarDropdown text="Votaciones" items={votingDropdownItems}>
+					<SidebarItem text="Votaciones" to="/dashboard/voting">
 						<svg
 							className="w-6 h-6"
 							fill="none"
@@ -108,7 +82,7 @@ export const Sidebar = () => {
 								d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
 							></path>
 						</svg>
-					</SidebarDropdown>
+					</SidebarItem>
 					<SidebarItem text="Estadísticas" to="/dashboard/statistics">
 						<svg
 							className="w-6 h-6"

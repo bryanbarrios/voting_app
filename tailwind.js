@@ -40,7 +40,8 @@ module.exports = {
 			},
 
 			dashboard: '#EDF1F7',
-
+			'login-art': '#FCB040',
+			'foreground-art': '#A66A11',
 			transparent: 'transparent',
 			current: 'currentColor',
 

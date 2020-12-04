@@ -3,10 +3,13 @@ import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 import logo from '../assets/images/logos/logo.svg';
 import compactLogo from '../assets/images/logos/compact-logo.svg';
+import { useVerification } from '../context/verification';
+import UserDropdown from './UserDropdown';
 
 export const Navbar = () => {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	const [atTopOfPage, setAtTopOfPage] = useState(false);
+	const { user } = useVerification();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -73,7 +76,7 @@ export const Navbar = () => {
 								</svg>
 							</button>
 						</div>
-						<div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+						<div className="flex items-center ml-10 md:ml-0 flex-1 sm:items-stretch sm:justify-start">
 							<div className="flex-shrink-0">
 								<Link to="/">
 									<img
@@ -106,12 +109,16 @@ export const Navbar = () => {
 							</div>
 						</div>
 						<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-							<NavLink
-								to="/login"
-								className="text-sm font-semibold leading-5 text-gray-600 transition duration-150 ease-in rounded-md focus:outline-none hover:text-gray-500"
-							>
-								Iniciar sesión
-							</NavLink>
+							{user !== null ? (
+								<UserDropdown email={user.email} rol={user.rol} />
+							) : (
+								<NavLink
+									to="/login"
+									className="text-sm font-semibold leading-5 text-gray-600 transition duration-150 ease-in rounded-md focus:outline-none hover:text-gray-500"
+								>
+									Iniciar sesión
+								</NavLink>
+							)}
 						</div>
 					</div>
 				</div>

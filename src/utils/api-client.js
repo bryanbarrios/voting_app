@@ -1,3 +1,5 @@
+import { logout } from '../auth-provider';
+
 const apiURL = process.env.REACT_APP_API_URL;
 
 async function client(
@@ -19,11 +21,14 @@ async function client(
 		.fetch(`${apiURL}/${endpoint}`, config)
 		.then(async (response) => {
 			if (response.status === 401) {
-				// Here the function to logout and clear cache (WIP)
-				// refresh the page
-				window.location.assign(window.location);
+				await logout();
 				return Promise.reject({
 					message: 'Por favor, inicie sesión nuevamente.',
+				});
+			}
+			if (response.status === 404) {
+				return Promise.reject({
+					message: 'No encontrado.',
 				});
 			}
 			const data = await response.json();

@@ -1,7 +1,8 @@
 import useSWR from 'swr';
-import { client } from '../utils/api-client';
+import { useClient } from '../context/verification';
 
 export const useFetch = (path) => {
+	const client = useClient();
 	const { data, error } = useSWR(path, client);
 	return {
 		data,

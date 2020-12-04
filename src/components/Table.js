@@ -5,7 +5,7 @@ import {
 	usePagination,
 	useGlobalFilter,
 } from 'react-table';
-import { client } from '../utils/api-client';
+import { useClient } from '../context/verification';
 import { GlobalFilter } from './GlobalFilter';
 import { IndeterminateCheckbox } from './IndeterminateCheckbox';
 import { Pagination } from './Pagination';
@@ -67,16 +67,22 @@ export const Table = ({ columns, path }) => {
 		}
 	);
 
+	const client = useClient();
+
 	useEffect(() => {
+		let mounted = true;
 		client(`${path}?page=${pageIndex + 1}&records=${pageSize}`).then(
 			(response) => {
-				setData(response.results);
-				setControlledPageCount(response.totalPages);
-				setLoading(false);
+				if (mounted) {
+					setData(response.results);
+					setControlledPageCount(response.totalPages);
+					setLoading(false);
+				}
 			}
 		);
 		setLoading(true);
-	}, [path, pageIndex, pageSize]);
+		return () => (mounted = false);
+	}, [path, pageIndex, pageSize, client]);
 
 	return (
 		<>
