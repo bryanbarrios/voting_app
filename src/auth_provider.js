@@ -16,16 +16,14 @@ function handleTokenResponse(data) {
 	return data;
 }
 
-function handleOtpResponse({ id, userId }) {
+function handleOtpResponse(data) {
+	const { id, userId } = data;
 	if (id === 0 && userId === 0) {
 		throw new Error('Credenciales inválidas');
 	} else {
-		window.localStorage.setItem(
-			authentication_id,
-			JSON.stringify({ id, userId })
-		);
+		window.localStorage.setItem(authentication_id, JSON.stringify(data));
 	}
-	return { id, userId };
+	return data;
 }
 
 function login(data) {
