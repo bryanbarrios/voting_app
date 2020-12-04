@@ -9,11 +9,13 @@ export const Button = ({
 	isBlock = false,
 	text,
 	type = 'button',
+	isDisable,
 	onClick,
 	...props
 }) => {
 	return (
 		<button
+			disabled={isDisable}
 			className={cx(
 				'py-2 my-4 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
 				{
@@ -45,5 +47,5 @@ Button.propTypes = {
 	variantColor: PropTypes.oneOf(['primary', 'secondary']),
 	size: PropTypes.oneOf(['xs', 'sm', 'base', 'lg']),
 	text: PropTypes.string.isRequired,
-	onClick: PropTypes.func
+	onClick: PropTypes.func,
 };

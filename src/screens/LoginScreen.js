@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Art } from '../components/art/Art';
 import { Button } from '../components/Button';
 import { FormikControl } from '../components/FormikControl';
 import logo from '../assets/images/logos/logo.svg';
+import { useAuth } from '../context/auth';
 import { EmailNotification } from '../components/EmailNotification';
-import { otp } from '../auth_provider';
+import Transition from '../components/Transition';
+import { ErrorNotification } from '../components/ErrorNotification';
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ history }) => {
+	const { isAuthenticated, login, isLoading, hasErrors } = useAuth();
+
 	const initialValues = {
 		email: '',
 		password: '',
@@ -20,8 +24,16 @@ export const LoginScreen = () => {
 	});
 
 	const onSubmit = (values) => {
-		otp(values);
+		login(values);
 	};
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			setTimeout(() => {
+				history.push('/verification');
+			}, 5000);
+		}
+	}, [isAuthenticated, history]);
 
 	return (
 		<div className="flex">
@@ -54,14 +66,36 @@ export const LoginScreen = () => {
 							/>
 							<Button
 								type="submit"
-								text="Iniciar sesión"
+								text={isLoading ? 'Cargando...' : 'Iniciar sesión'}
 								variantColor="secondary"
 								isBlock={true}
+								isDisable={isLoading}
 							/>
 						</Form>
 					)}
 				</Formik>
-				<EmailNotification />
+				<Transition
+					show={isAuthenticated}
+					enter="transition ease-out duration-700"
+					enterFrom="transform opacity-0 scale-95"
+					enterTo="transform opacity-100 scale-100"
+					leave="transition ease-in duration-100"
+					leaveFrom="transform opacity-100 scale-300"
+					leaveTo="transform opacity-0 scale-95"
+				>
+					<EmailNotification />
+				</Transition>
+				<Transition
+					show={hasErrors}
+					enter="transition ease-out duration-700"
+					enterFrom="transform opacity-0 scale-95"
+					enterTo="transform opacity-100 scale-100"
+					leave="transition ease-in duration-100"
+					leaveFrom="transform opacity-100 scale-300"
+					leaveTo="transform opacity-0 scale-95"
+				>
+					<ErrorNotification />
+				</Transition>
 			</div>
 		</div>
 	);
