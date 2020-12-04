@@ -3,10 +3,15 @@ import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 import logo from '../assets/images/logos/logo.svg';
 import compactLogo from '../assets/images/logos/compact-logo.svg';
+import { useVerification } from '../context/verification';
 
 export const Navbar = () => {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	const [atTopOfPage, setAtTopOfPage] = useState(false);
+
+	const { user } = useVerification()
+
+	console.log(user)
 
 	useEffect(() => {
 		const handleScroll = () => {

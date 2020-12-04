@@ -13,12 +13,7 @@ import { useAuth } from '../context/auth';
 export const VerificationScreen = ({ history }) => {
 	const { authenticationId } = useAuth();
 	const { id, userId } = authenticationId;
-	const {
-		isVerified,
-		verification,
-		isLoading,
-		hasErrors,
-	} = useVerification();
+	const { isVerified, verification, isLoading, hasErrors } = useVerification();
 
 	const initialValues = {
 		otp: '',

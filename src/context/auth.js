@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import * as auth from '../auth_provider';
+import * as auth from '../auth-provider';
 
 const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext';
@@ -16,12 +16,12 @@ const AuthContextProvider = ({ children }) => {
 	);
 };
 
-const useAuth = () => {	
+const useAuth = () => {
 	const { authenticationId, setAuthenticationId } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasErrors, setHasErrors] = useState(false);
 
-	const login =	 useCallback(
+	const login = useCallback(
 		(data) => {
 			setIsLoading(true);
 			auth
@@ -43,7 +43,7 @@ const useAuth = () => {
 		login,
 		isLoading,
 		hasErrors,
-		authenticationId
+		authenticationId,
 	};
 };
 

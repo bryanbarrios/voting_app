@@ -4,7 +4,7 @@ const TOKEN_KEY = '__auth_token__';
 const AUTHENTICATION_KEY = '__authentication_id__';
 
 function getToken() {
-	return JSON.parse(window.localStorage.getItem(TOKEN_KEY));
+	return window.localStorage.getItem(TOKEN_KEY);
 }
 
 function getAuthenticationId() {
