@@ -54,7 +54,7 @@ const useVerification = () => {
 		if (token !== null) {
 			setUser(decodeToken(token));
 		}
-	}, [token]);
+	}, [token, setUser]);
 
 	return {
 		isVerified: Boolean(token),
@@ -67,7 +67,7 @@ const useVerification = () => {
 };
 
 const useClient = () => {
-	const { token } = useVerification();
+	const token = auth.getToken();
 	return useCallback(
 		(endpoint, config) => client(endpoint, { ...config, token }),
 		[token]

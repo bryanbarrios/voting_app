@@ -4,23 +4,18 @@ const TOKEN_KEY = '__auth_token__';
 const AUTHENTICATION_KEY = '__authentication_id__';
 
 function getToken() {
-	return window.localStorage.getItem(TOKEN_KEY);
+	return JSON.parse(window.localStorage.getItem(TOKEN_KEY));
 }
 
 function getAuthenticationId() {
 	return JSON.parse(window.localStorage.getItem(AUTHENTICATION_KEY));
 }
 
-function removeAuthenticationId() {
-	window.localStorage.removeItem(AUTHENTICATION_KEY);
-}
-
 function handleTokenResponse(data) {
 	const { token, attempts, validated } = data;
 
 	if (attempts === 0) {
-		removeAuthenticationId();
-		window.location.assign(window.location);
+		logout();
 		throw new Error('Ha superado la cantidad máxima de intentos permitidos.');
 	}
 
@@ -51,14 +46,9 @@ function verification(data) {
 }
 
 async function logout() {
+	window.localStorage.removeItem(AUTHENTICATION_KEY);
 	window.localStorage.removeItem(TOKEN_KEY);
+	window.location.assign(window.location);
 }
 
-export {
-	getToken,
-	getAuthenticationId,
-	removeAuthenticationId,
-	login,
-	verification,
-	logout,
-};
+export { getToken, getAuthenticationId, login, verification, logout };

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import logo from '../assets/images/logos/logo.svg';
 import { Button } from '../components/Button';
 import { FormikControl } from '../components/FormikControl';
 import { Art } from '../components/art/Art';
@@ -43,7 +44,8 @@ export const VerificationScreen = ({ history }) => {
 		<div className="flex">
 			<Art />
 			<div className="p-4 md:my-auto md:mx-auto bg-white rounded-lg w-full h-screen md:h-auto md:max-w-md">
-				<h1 className="text-2xl font-bold text-secondary-500 self-start mb-4">
+				<img src={logo} alt="Logo" className="md:hidden py-4" />
+				<h1 className="text-2xl font-bold text-secondary-500 self-start mt-2 mb-4">
 					Código de verificación
 				</h1>
 				<Formik

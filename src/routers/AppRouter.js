@@ -12,7 +12,7 @@ import { useVerification } from '../context/verification';
 import { useAuth } from '../context/auth';
 
 export const AppRouter = () => {
-	const { isVerified } = useVerification();
+	const { isVerified, user } = useVerification();
 	const { isAuthenticated } = useAuth();
 
 	return (
@@ -48,6 +48,7 @@ export const AppRouter = () => {
 					/>
 					<PrivateRoute
 						path="/dashboard"
+						rol={user?.rol}
 						isAuthenticated={isVerified}
 						component={DashboardRoutes}
 					/>
