@@ -25,7 +25,7 @@ const DashboardNavbar = ({ isOpen, history }) => {
 
 	return (
 		<>
-			<nav className="bg-white w-full border-l-1 sticky top-0 z-50">
+			<nav className="bg-white w-full border-l-1 sticky top-0">
 				<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-4">
 					<div className="relative flex items-center justify-between h-16">
 						<div className="flex items-center z-50">

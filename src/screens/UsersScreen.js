@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button } from '../components/Button';
+import { Modal } from '../components/Modal';
 import { Table } from '../components/Table';
 import { Title } from '../components/Title';
 
 export const UsersScreen = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	const USER_ENDPOINT = 'user';
 
 	const columns = useMemo(
@@ -35,7 +37,15 @@ export const UsersScreen = () => {
 	return (
 		<div>
 			<Title text="Gestión de Usuarios" />
-			<Button text="Registrar usuario" variantColor="secondary" />
+			<Button
+				onClick={() => setIsOpen(true)}
+				text="Registrar usuario"
+				variantColor="secondary"
+			/>
+			<Modal openModal={isOpen} closeModel={() => setIsOpen(false)}>
+				<Title text="Registro de usuario" />
+				<p>Lorem Ipsum.</p>
+			</Modal>
 			<Table columns={columns} path={USER_ENDPOINT} />
 		</div>
 	);

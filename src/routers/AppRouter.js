@@ -26,11 +26,10 @@ export const AppRouter = () => {
 						restricted={false}
 						component={HomeScreen}
 					/>
-					<PublicRoute
+					<PrivateRoute
 						exact
 						path="/elections"
 						isAuthenticated={isVerified}
-						restricted={false}
 						component={ElectionsScreen}
 					/>
 					<PublicRoute
