@@ -15,7 +15,7 @@ export const PrivateRoute = ({
 				isAuthenticated || rol === 'Admin' ? (
 					<Component {...props} />
 				) : (
-					<Redirect to="/" />
+					<Redirect to="/login" />
 				)
 			}
 		/>
