@@ -9,6 +9,7 @@ export const Button = ({
 	isBlock = false,
 	text,
 	type = 'button',
+	hidden = false,
 	isDisable,
 	onClick,
 	...props
@@ -17,7 +18,7 @@ export const Button = ({
 		<button
 			disabled={isDisable}
 			className={cx(
-				'py-2 my-4 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
+				'my-2 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
 				{
 					'border-solid border	-2 border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600':
 						variant === 'outline' && variantColor === 'primary',
@@ -27,11 +28,14 @@ export const Button = ({
 						variant === 'solid' && variantColor === 'primary',
 					'bg-secondary-500 text-white hover:bg-secondary-600':
 						variant === 'solid' && variantColor === 'secondary',
-					'text-xs': size === 'xs',
-					'text-sm': size === 'sm',
-					'text-base': size === 'base',
-					'text-lg': size === 'lg',
+					'bg-red-500 text-white hover:bg-red-600':
+						variant === 'solid' && variantColor === 'danger',
+					'text-xs py-1': size === 'xs',
+					'text-sm py-2': size === 'sm',
+					'text-base py-2': size === 'base',
+					'text-lg py-2': size === 'lg',
 					'w-full': isBlock === true,
+					hidden: hidden === true,
 				}
 			)}
 			type={type}
@@ -44,7 +48,7 @@ export const Button = ({
 
 Button.propTypes = {
 	variant: PropTypes.oneOf(['solid', 'outline', 'link']),
-	variantColor: PropTypes.oneOf(['primary', 'secondary']),
+	variantColor: PropTypes.oneOf(['primary', 'secondary', 'danger']),
 	size: PropTypes.oneOf(['xs', 'sm', 'base', 'lg']),
 	text: PropTypes.string.isRequired,
 	onClick: PropTypes.func,

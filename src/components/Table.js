@@ -6,12 +6,13 @@ import {
 	useGlobalFilter,
 } from 'react-table';
 import { useClient } from '../context/verification';
+import { Button } from './Button';
 import { GlobalFilter } from './GlobalFilter';
 import { IndeterminateCheckbox } from './IndeterminateCheckbox';
 import { Pagination } from './Pagination';
 import { Spinner } from './Spinner';
 
-export const Table = ({ columns, path }) => {
+export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 	const [controlledPageCount, setControlledPageCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
@@ -84,6 +85,20 @@ export const Table = ({ columns, path }) => {
 		return () => (mounted = false);
 	}, [path, pageIndex, pageSize, client]);
 
+	const deleteSeleted = () => {
+		const ids = selectedFlatRows.map((d) => d.original.id);
+		client(path, {
+			method: 'DELETE',
+			ids,
+		})
+			.then(() => {
+				setLoading(false);
+			})
+			.catch((error) => console.log(error));
+
+		console.log(Array.isArray(ids));
+	};
+
 	return (
 		<>
 			<div className="flex flex-col">
@@ -94,7 +109,7 @@ export const Table = ({ columns, path }) => {
 						setGlobalFilter={setGlobalFilter}
 					/>
 				</div>
-				<div>
+				<div className="flex justify-between items-center">
 					<Pagination
 						firstPage={() => gotoPage(0)}
 						previousPage={() => previousPage()}
@@ -109,6 +124,16 @@ export const Table = ({ columns, path }) => {
 						totalPages={pageOptions.length}
 						lastPage={() => gotoPage(pageCount - 1)}
 					/>
+					<div>
+						<Button
+							size="xs"
+							text={loading ? 'Eliminando...' : 'Eliminar'}
+							isDisable={loading}
+							variantColor="danger"
+							onClick={deleteSeleted}
+							hidden={selectedFlatRows.length === 0 || path !== 'user'}
+						/>
+					</div>
 				</div>
 				<div>{loading && <Spinner />}</div>
 				<div className="overflow-x-auto">
@@ -142,6 +167,11 @@ export const Table = ({ columns, path }) => {
 											<tr
 												{...row.getRowProps()}
 												className="hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer"
+												onClick={() => {
+													rowData(row.original);
+													isUpdate(true);
+													isOpen(true);
+												}}
 											>
 												{row.cells.map((cell) => {
 													return (

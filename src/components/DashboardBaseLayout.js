@@ -21,7 +21,7 @@ export const DashboardBaseLayout = ({ children }) => {
 			</Transition>
 			<div className="flex flex-col w-full">
 				<DashboardNavbar isOpen={setIsSidebarOpen} />
-				<div className="container p-4 lg:p-6">
+				<div className="w-full p-4 lg:p-6">
 					{children}
 				</div>
 			</div>

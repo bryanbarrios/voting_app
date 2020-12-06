@@ -37,7 +37,8 @@ async function client(
 			} else {
 				return Promise.reject(data);
 			}
-		});
+		})
+		.catch((error) => console.log(error));
 }
 
 export { client };

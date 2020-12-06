@@ -15,7 +15,7 @@ export const Pagination = ({
 	totalPages,
 }) => {
 	return (
-		<div className="flex items-center lg:justify-between md:flex-row sm:flex-col flex-col my-3">
+		<div className="flex items-center md:flex-row sm:flex-col flex-col my-3">
 			<div className="bg-white shadow h-10 w-full sm:w-full md:w-auto p-1 my-1 rounded-lg flex items-center mr-0 md:mr-2">
 				<PaginationButton onClick={firstPage} isDisabled={canPreviousPage}>
 					<svg

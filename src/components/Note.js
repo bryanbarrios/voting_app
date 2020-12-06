@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 export const Note = ({ children, seconds }) => {
 	const [hidden, setHidden] = useState(false);
 
-	setTimeout(() => setHidden(true), seconds * 1000);
+	useEffect(() => {
+		const timer = setTimeout(() => setHidden(true), seconds * 1000);
+		return () => {
+			clearTimeout(timer);
+		};
+	}, [seconds]);
 
 	return (
 		<div
