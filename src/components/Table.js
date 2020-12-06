@@ -115,17 +115,17 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 	}, [path, pageIndex, pageSize, client]);
 
 	const deleteSeleted = () => {
+		setLoading(true);
 		const ids = selectedFlatRows.map((d) => d.original.id);
 		client(path, {
 			method: 'DELETE',
-			ids,
+			data: { ids },
 		})
 			.then(() => {
 				setLoading(false);
+				window.location.assign(window.location);
 			})
 			.catch((error) => console.log(error));
-
-		console.log(Array.isArray(ids));
 	};
 
 	return (

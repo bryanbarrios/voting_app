@@ -12,17 +12,17 @@
     "formik": "^2.2.5",
     "jwt-decode": "^3.1.2",
     "npm-run-all": "^4.1.5",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-device-detect": "^1.14.0",
-    "react-dom": "^16.13.1",
-    "react-modal": "^3.11.2",
+    "react-dom": "^16.14.0",
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-table": "^7.6.1",
+    "react-table": "^7.6.2",
     "react-transition-group": "^4.4.1",
-    "swr": "^0.3.6",
-    "tailwindcss": "^1.8.10",
-    "yup": "^0.31.0"
+    "swr": "^0.3.9",
+    "tailwindcss": "^1.9.6",
+    "yup": "^0.31.1"
   },
   "scripts": {
     "build:tailwind": "postcss src/styles/tailwind.css -o src/styles/main.css",
@@ -51,16 +51,16 @@
   },
   "devDependencies": {
     "chokidar-cli": "^2.1.0",
-    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "postcss-cli": "^7.1.2",
-    "prettier": "^2.1.1"
+    "prettier": "^2.2.1"
   }
 }

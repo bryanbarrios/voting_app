@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Button } from '../components/Button';
+import { CandidateForm } from '../components/forms/CandidateForm';
 import { Modal } from '../components/Modal';
 import { Table } from '../components/Table';
 import { Title } from '../components/Title';
@@ -7,6 +8,8 @@ import { Title } from '../components/Title';
 export const CandidatesScreen = () => {
 	const CANDIDATE_ENDPOINT = 'candidate';
 	const [isOpen, setIsOpen] = useState(false);
+	const [rowData, setRowData] = useState(null);
+	const [isUpdate, setIsUpdate] = useState(false);
 
 	const columns = useMemo(
 		() => [
@@ -42,15 +45,23 @@ export const CandidatesScreen = () => {
 		<div>
 			<Title text="Gestión de Candidatos" />
 			<Button
-				onClick={() => setIsOpen(true)}
+				onClick={() => {
+					setIsOpen(true);
+					setIsUpdate(false);
+					setRowData(null);
+				}}
 				text="Registrar candidato"
 				variantColor="secondary"
 			/>
 			<Modal openModal={isOpen} closeModel={() => setIsOpen(false)}>
-				<Title text="Registro candidato" />
-				<p>Lorem Ipsum.</p>
+				<CandidateForm rowData={rowData} isUpdate={isUpdate} />
 			</Modal>
-			<Table columns={columns} path={CANDIDATE_ENDPOINT} />
+			<Table
+				columns={columns}
+				rowData={setRowData}
+				isUpdate={setIsUpdate}
+				path={CANDIDATE_ENDPOINT}
+			/>
 		</div>
 	);
 };
