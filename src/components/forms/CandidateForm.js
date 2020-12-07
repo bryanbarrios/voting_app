@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '../Button';
 import Transition from '../Transition';
 import { ErrorNotification } from '../ErrorNotification';
@@ -7,29 +7,50 @@ import { FormikControl } from '../FormikControl';
 import { useFetch } from '../../hooks/useFetch';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useClient } from '../../context/verification';
 
 export const CandidateForm = ({ rowData, isUpdate }) => {
+	const client = useClient();
+	const { post, update, isLoading, hasErrors } = useFetch();
 	const CANDIDATE_ENDPOINT = 'candidate';
 	const POLITICAL_PARTY_ENDPOINT = 'political-party';
-	const { post, update, isLoading, hasErrors } = useFetch();
+
+	const loadPoliticalParties = useCallback(
+		(inputValue = '', callback) => {
+			client(`${POLITICAL_PARTY_ENDPOINT}?filter=${inputValue}`).then(
+				({ results }) =>
+					callback(
+						results.map(({ id, politicalPartyName }) => {
+							return { label: politicalPartyName, value: id };
+						})
+					)
+			);
+		},
+		[client]
+	);
 
 	const initialValues = {
 		first_name: rowData?.firstName || '',
-		middlename: rowData?.middlenName || '',
+		middlename: rowData?.middleName || '',
 		last_name: rowData?.lastName || '',
-		surname: rowData?.surname || '',
-		political_party_id: rowData?.politicalPartyId,
+		surnname: rowData?.surname || '',
+		political_party_id: '',
 	};
 
 	const validationSchema = Yup.object({
 		first_name: Yup.string().required('Requerido'),
 		middlename: Yup.string().required('Requerido'),
 		last_name: Yup.string().required('Requerido'),
-		surname: Yup.string().required('Requerido'),
-		political_party_id: Yup.number().required('Requerido'),
+		surnname: Yup.string().required('Requerido'),
+		political_party_id: Yup.object().required('Requerido'),
 	});
 
-	const onSubmit = (data) => {
+	const onSubmit = (values) => {
+		const data = {
+			...values,
+			political_party_id: values.political_party_id.value,
+		};
+
 		isUpdate
 			? update(CANDIDATE_ENDPOINT, rowData.id, data)
 			: post(CANDIDATE_ENDPOINT, data);
@@ -37,9 +58,7 @@ export const CandidateForm = ({ rowData, isUpdate }) => {
 
 	return (
 		<div>
-			<Title
-				text={isUpdate ? 'Editar partido político' : 'Nuevo partido político'}
-			/>
+			<Title text={isUpdate ? 'Editar candidato' : 'Nuevo candidato'} />
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}
@@ -72,9 +91,24 @@ export const CandidateForm = ({ rowData, isUpdate }) => {
 							control="input"
 							type="text"
 							label="Segundo apellido"
-							name="surname"
+							name="surnname"
 							placeholder="Ingresa el segundo apellido"
 						/>
+						{!isUpdate && (
+							<FormikControl
+								control="dropdown"
+								label="Partido político"
+								name="political_party_id"
+								loadOptions={loadPoliticalParties}
+								defaultOptions
+								menuPlacement="top"
+								onChange={(option) => {
+									formik.setFieldValue('political_party_id', option);
+								}}
+								value={formik.values.political_party_id}
+								placeholder="Seleccione o busque un partido político"
+							/>
+						)}
 						<Button
 							type="submit"
 							text={

@@ -72,7 +72,7 @@ export const CreateUserForm = () => {
 	};
 
 	return (
-		<>
+		<div>
 			<Title text="Nuevo usuario" />
 			<Formik
 				initialValues={initialValues}
@@ -128,6 +128,7 @@ export const CreateUserForm = () => {
 							text={isLoading ? 'Cargando...' : 'Registrar'}
 							variantColor="secondary"
 							isDisable={isLoading}
+							isBlock={true}
 						/>
 					</Form>
 				)}
@@ -147,6 +148,6 @@ export const CreateUserForm = () => {
 					}
 				</ErrorNotification>
 			</Transition>
-		</>
+		</div>
 	);
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dropdown } from './Dropdown';
 import { Input } from './Input';
 import { SingleOtpInput } from './SingleOtpInput';
 
@@ -8,6 +9,8 @@ export const FormikControl = ({ control, ...rest }) => {
 			return <Input {...rest} />;
 		case 'singleOtpInput':
 			return <SingleOtpInput {...rest} />;
+		case 'dropdown':
+			return <Dropdown {...rest} />;
 		case 'textarea':
 		case 'select':
 		case 'radio':

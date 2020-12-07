@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const DropdownItem = ({ to, text, action }) => {
+export const UserDropdownItem = ({ to, text, action }) => {
 	return (
 		<Link
 			to={to}

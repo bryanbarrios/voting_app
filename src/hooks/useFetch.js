@@ -49,7 +49,7 @@ export const useFetch = () => {
 	const update = useCallback(
 		(endpoint, id, data) => {
 			setIsLoading(true);
-			console.log(data);
+			console.log(data)
 			client(`${endpoint}/${id}`, {
 				method: 'PUT',
 				data,

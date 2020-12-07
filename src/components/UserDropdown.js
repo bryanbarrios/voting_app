@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import cx from 'classnames';
 import { withRouter } from 'react-router-dom';
 import Transition from './Transition';
-import { DropdownItem } from './DropdownItem';
+import { UserDropdownItem } from './UserDropdownItem';
 import { useVerification } from '../context/verification';
 
 const UserDropdown = ({ email, rol, history }) => {
@@ -86,9 +86,9 @@ const UserDropdown = ({ email, rol, history }) => {
 						aria-labelledby="user-menu"
 					>
 						{rol === 'Admin' && (
-							<DropdownItem text="Panel de administración" to="/dashboard" />
+							<UserDropdownItem text="Panel de administración" to="/dashboard" />
 						)}
-						<DropdownItem text="Cerrar sesión" to="/login" action={logout} />
+						<UserDropdownItem text="Cerrar sesión" to="/login" action={logout} />
 					</div>
 				</Transition>
 			</div>

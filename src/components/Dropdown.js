@@ -1,8 +1,9 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { TextError } from './TextError';
+import AsyncSelect from 'react-select/async';
 
-export const Input = ({ label, name, ...rest }) => {
+export const Dropdown = ({ label, name, ...rest }) => {
 	return (
 		<div className="flex flex-col my-1">
 			<label
@@ -11,16 +12,10 @@ export const Input = ({ label, name, ...rest }) => {
 			>
 				{label}
 			</label>
-			<Field id={name} name={name} {...rest} as={CustomInputComponent} />
+			<Field id={name} name={name} {...rest} as={DropdownComponent} />
 			<ErrorMessage name={name} component={TextError} />
 		</div>
 	);
 };
 
-const CustomInputComponent = ({ ...rest }) => (
-	<input
-		className="bg-gray-200 focus:bg-white rounded-md px-3 py-2 outline-none focus:shadow-outline"
-		{...rest}
-	/>
-);
-	
+const DropdownComponent = ({ ...rest }) => <AsyncSelect {...rest} />;

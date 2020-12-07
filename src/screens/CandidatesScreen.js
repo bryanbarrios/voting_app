@@ -60,6 +60,7 @@ export const CandidatesScreen = () => {
 				columns={columns}
 				rowData={setRowData}
 				isUpdate={setIsUpdate}
+				isOpen={setIsOpen}
 				path={CANDIDATE_ENDPOINT}
 			/>
 		</div>
