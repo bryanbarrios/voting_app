@@ -19,7 +19,7 @@ export const CreateUserForm = () => {
 		password: '',
 		password_verification: '',
 		last_names: '',
-		rol_id: 1,
+		rol_id: 2,
 	};
 
 	const validationSchema = Yup.object({

@@ -28,8 +28,9 @@ const ElectionsScreen = () => {
 			</div>
 			<p className="text-xl font-medium text-gray-600 mb-5">
 				Antes de votar te recomendamos que pienses muy bien tu decisión. No te
-				preocupes, con Vote Now tu voto <strong>SI CUENTA</strong>, y a como la
-				ley lo estipula tu voto es <strong>SECRETO</strong>.
+				preocupes, con <strong>Vote Now</strong> tu voto{' '}
+				<strong>SI CUENTA</strong>, y a como la ley lo estipula tu voto es{' '}
+				<strong>SECRETO</strong>.
 			</p>
 			<h2 className="text-xl text-secondary-500 font-semibold mb-4">
 				Elecciones disponibles

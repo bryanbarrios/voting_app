@@ -56,10 +56,7 @@ export const VotingScreen = () => {
 				variantColor="secondary"
 			/>
 			<Modal openModal={isOpen} closeModel={() => setIsOpen(false)}>
-				<VotingForm
-					rowData={rowData}
-					isUpdate={isUpdate}
-				/>
+				<VotingForm rowData={rowData} isUpdate={isUpdate} />
 			</Modal>
 			<Table
 				columns={columns}

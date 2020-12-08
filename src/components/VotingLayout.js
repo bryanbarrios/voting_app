@@ -141,9 +141,12 @@ export const VotingLayout = ({ data }) => {
 			<div className="flex flex-row">
 				{data.candidates.map((candidate) => (
 					<Card
+						key={candidate.id}
 						candidateName={`${candidate.firstName} ${candidate.middleName} ${candidate.lastName} ${candidate.surname}`}
 						politicalPartyName={candidate.politicalPartyName}
 						flagUrl={candidate.politicalPartyImageUrl}
+						votingId={data.id}
+						candidateId={candidate.id}
 					/>
 				))}
 			</div>

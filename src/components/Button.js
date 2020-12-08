@@ -36,7 +36,8 @@ export const Button = ({
 					'text-lg py-2': size === 'lg',
 					'w-full': isBlock === true,
 					hidden: hidden === true,
-					'bg-gray-600': isDisable === true,
+					'bg-gray-700 hover:bg-gray-700 cursor-not-allowed':
+						isDisable === true,
 				}
 			)}
 			type={type}
