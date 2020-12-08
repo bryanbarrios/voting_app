@@ -67,10 +67,19 @@ export const VotingForm = () => {
 		candidates: '',
 	};
 
+	const today = new Date();
+	const currentDate =
+		today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
 	const validationSchema = Yup.object({
 		votation_type_id: Yup.object().required('Requerido'),
 		votation_description: Yup.string().max('100').required('Requerido'),
-		votation_start_date: Yup.date().required('Requerido'),
+		votation_start_date: Yup.date()
+			.required('Requerido')
+			.min(
+				currentDate,
+				'La fecha de inicio debe ser igual o posterior que la actual'
+			),
 		votation_end_date: Yup.date()
 			.required('Requerido')
 			.when(
