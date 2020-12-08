@@ -4,7 +4,7 @@
 @layer components {
 	.card__container {
 		width: 280px;
-		@apply h-auto shadow-md p-3 m-2 flex flex-col justify-between rounded-lg;
+		@apply h-auto shadow-md px-3 pt-3 pb-1 m-2 flex flex-col justify-between rounded-lg;
 	}
 
 	.card__image__container {
@@ -13,7 +13,7 @@
 
 	.card__image__figure {
 		width: 100%;
-		height: 180px;
+		height: 80px;
 	}
 
 	.card__image {

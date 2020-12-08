@@ -14,7 +14,18 @@ const ElectionsScreen = () => {
 
 	return (
 		<div>
-			<h1 className="text-4xl text-secondary-500 font-bold mb-2">Elecciones</h1>
+			<div className="flex flex-row items-center space-x-2">
+				<img
+					src="https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Nicaragua.svg"
+					width="40px"
+					height="40px"
+					className="pb-2"
+					alt="Flag"
+				/>
+				<h1 className="text-4xl text-secondary-500 font-bold mb-2">
+					Elecciones
+				</h1>
+			</div>
 			<p className="text-xl font-medium text-gray-600 mb-5">
 				Antes de votar te recomendamos que pienses muy bien tu decisión. No te
 				preocupes, con Vote Now tu voto <strong>SI CUENTA</strong>, y a como la

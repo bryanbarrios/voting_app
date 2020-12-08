@@ -18,7 +18,7 @@ export const Button = ({
 		<button
 			disabled={isDisable}
 			className={cx(
-				'px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
+				'my-2 px-4 rounded-md font-semibold focus:outline-none focus:shadow-outline transition duration-200 ease-in',
 				{
 					'border-solid border	-2 border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600':
 						variant === 'outline' && variantColor === 'primary',
