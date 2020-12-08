@@ -32,11 +32,17 @@ export const VotingScreen = () => {
 			},
 			{
 				Header: 'Fecha de apertura',
-				accessor: 'votationStartDate',
+				accessor: (v) =>
+					new Date(v.votationStartDate).toLocaleDateString('es-NI'),
 			},
 			{
 				Header: 'Fecha de cierre',
-				accessor: 'votationEndDate',
+				accessor: (v) =>
+					new Date(v.votationEndDate).toLocaleDateString('es-NI'),
+			},
+			{
+				Header: 'Estado',
+				accessor: (v) => (v.votationStatus ? 'Activa' : 'Inactiva'),
 			},
 		],
 		[]
