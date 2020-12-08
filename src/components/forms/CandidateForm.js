@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { Button } from '../Button';
-import Transition from '../Transition';
 import { ErrorNotification } from '../ErrorNotification';
 import { Title } from '../Title';
 import { FormikControl } from '../FormikControl';
@@ -97,6 +96,7 @@ export const CandidateForm = ({ rowData, isUpdate }) => {
 						{!isUpdate && (
 							<FormikControl
 								control="dropdown"
+								isAsync={true}
 								label="Partido político"
 								name="political_party_id"
 								loadOptions={loadPoliticalParties}
@@ -121,21 +121,10 @@ export const CandidateForm = ({ rowData, isUpdate }) => {
 					</Form>
 				)}
 			</Formik>
-			<Transition
-				show={hasErrors}
-				enter="transition ease-out duration-700"
-				enterFrom="transform opacity-0 scale-95"
-				enterTo="transform opacity-100 scale-100"
-				leave="transition ease-in duration-100"
-				leaveFrom="transform opacity-100 scale-300"
-				leaveTo="transform opacity-0 scale-95"
-			>
-				<ErrorNotification>
-					{
-						'Ha ocurrido un error, verifique los datos introducidos e inténtelo nuevamente.'
-					}
-				</ErrorNotification>
-			</Transition>
+			{hasErrors !== null &&
+				hasErrors.error.map((error, index) => (
+					<ErrorNotification key={index}>{error}</ErrorNotification>
+				))}
 		</div>
 	);
 };

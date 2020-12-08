@@ -18,10 +18,10 @@ export const useFetch = () => {
 					setIsSuccess(true);
 					setResponse(data);
 				})
-				.catch(() => {
+				.catch((error) => {
 					setIsLoading(false);
 					setIsSuccess(false);
-					setHasErrors(true);
+					setHasErrors(error);
 				});
 		},
 		[client]
@@ -37,10 +37,10 @@ export const useFetch = () => {
 					setResponse(response);
 					window.location.assign(window.location);
 				})
-				.catch(() => {
+				.catch((error) => {
 					setIsSuccess(false);
 					setIsLoading(false);
-					setHasErrors(true);
+					setHasErrors(error);
 				});
 		},
 		[client]
@@ -49,7 +49,6 @@ export const useFetch = () => {
 	const update = useCallback(
 		(endpoint, id, data) => {
 			setIsLoading(true);
-			console.log(data)
 			client(`${endpoint}/${id}`, {
 				method: 'PUT',
 				data,
@@ -60,10 +59,10 @@ export const useFetch = () => {
 					setResponse(response);
 					window.location.assign(window.location);
 				})
-				.catch(() => {
+				.catch((error) => {
 					setIsSuccess(false);
 					setIsLoading(false);
-					setHasErrors(true);
+					setHasErrors(error);
 				});
 		},
 		[client]
@@ -82,10 +81,10 @@ export const useFetch = () => {
 					setResponse(response);
 					window.location.assign(window.location);
 				})
-				.catch(() => {
+				.catch((error) => {
 					setIsSuccess(false);
 					setIsLoading(false);
-					setHasErrors(true);
+					setHasErrors(error);
 				});
 		},
 		[client]

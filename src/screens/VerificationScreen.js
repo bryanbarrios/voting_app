@@ -8,7 +8,6 @@ import { Art } from '../components/art/Art';
 import { Note } from '../components/Note';
 import { useVerification } from '../context/verification';
 import { ErrorNotification } from '../components/ErrorNotification';
-import Transition from '../components/Transition';
 import { useAuth } from '../context/auth';
 
 export const VerificationScreen = ({ history }) => {
@@ -71,17 +70,9 @@ export const VerificationScreen = ({ history }) => {
 						</Form>
 					)}
 				</Formik>
-				<Transition
-					show={hasErrors.message !== ''}
-					enter="transition ease-out duration-700"
-					enterFrom="transform opacity-0 scale-95"
-					enterTo="transform opacity-100 scale-100"
-					leave="transition ease-in duration-100"
-					leaveFrom="transform opacity-100 scale-300"
-					leaveTo="transform opacity-0 scale-95"
-				>
-					<ErrorNotification>{`${hasErrors.message}`}</ErrorNotification>
-				</Transition>
+				{hasErrors !== null && (
+					<ErrorNotification>{hasErrors.error}</ErrorNotification>
+				)}
 				<Note seconds={5}>
 					{
 						'El código de verificación será válido durante 3 minutos y tendrá 3 intentos para introducirlo correctamente.'

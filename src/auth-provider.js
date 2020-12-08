@@ -16,11 +16,15 @@ function handleTokenResponse(data) {
 
 	if (attempts === 0) {
 		logout();
-		throw new Error('Ha superado la cantidad máxima de intentos permitidos.');
+		return Promise.reject({
+			error: 'Ha superado la cantidad máxima de intentos permitidos.',
+		});
 	}
 
 	if (validated === false) {
-		throw new Error('Ingrese el código de verificación correctamente.');
+		return Promise.reject({
+			error: 'Ingrese el código de verificación correctamente.',
+		});
 	}
 
 	window.localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
@@ -30,7 +34,9 @@ function handleTokenResponse(data) {
 function handleOtpResponse(data) {
 	const { id, userId } = data;
 	if (id === 0 && userId === 0) {
-		throw new Error('Credenciales inválidas');
+		return Promise.reject({
+			error: 'Correo electrónico o contraseña inválida.',
+		});
 	} else {
 		window.localStorage.setItem(AUTHENTICATION_KEY, JSON.stringify(data));
 	}

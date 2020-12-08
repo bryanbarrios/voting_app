@@ -40,7 +40,13 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 		{
 			columns,
 			data,
-			initialState: { pageIndex: 0 },
+			initialState: {
+				pageIndex: 0,
+				hiddenColumns: [
+					path !== 'user' && 'selection',
+					path === 'votation' && 'edit',
+				],
+			},
 			manualPagination: true,
 			pageCount: controlledPageCount,
 			autoResetPage: false,
@@ -53,6 +59,7 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 			hooks.visibleColumns.push((columns) => [
 				{
 					id: 'selection',
+					show: path === 'user',
 					Header: ({ getToggleAllPageRowsSelectedProps }) => (
 						<div>
 							<IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
@@ -66,6 +73,7 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 				},
 				...columns,
 				{
+					id: 'edit',
 					Cell: ({ row }) => (
 						<div>
 							<IconButton

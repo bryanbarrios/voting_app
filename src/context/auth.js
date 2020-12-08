@@ -19,7 +19,7 @@ const AuthContextProvider = ({ children }) => {
 const useAuth = () => {
 	const { authenticationId, setAuthenticationId } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(false);
-	const [hasErrors, setHasErrors] = useState(false);
+	const [hasErrors, setHasErrors] = useState(null);
 
 	const login = useCallback(
 		(data) => {
@@ -30,9 +30,9 @@ const useAuth = () => {
 					setIsLoading(false);
 					setAuthenticationId(data);
 				})
-				.catch(() => {
+				.catch((error) => {
 					setIsLoading(false);
-					setHasErrors(true);
+					setHasErrors(error);
 				});
 		},
 		[setAuthenticationId]

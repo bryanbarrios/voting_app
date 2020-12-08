@@ -17,20 +17,18 @@ async function client(
 		...customConfig,
 	};
 
-	console.log(endpoint);
-
 	return window
 		.fetch(`${apiURL}/${endpoint}`, config)
 		.then(async (response) => {
 			if (response.status === 401) {
 				await logout();
 				return Promise.reject({
-					message: 'Por favor, inicie sesión nuevamente.',
+					error: 'Por favor, inicie sesión nuevamente.',
 				});
 			}
 			if (response.status === 404) {
 				return Promise.reject({
-					message: 'No encontrado.',
+					error: 'No encontrado.',
 				});
 			}
 			const data = await response.json();
@@ -40,7 +38,12 @@ async function client(
 				return Promise.reject(data);
 			}
 		})
-		.catch((error) => console.log(error));
+		.catch(({ error }) => {
+			console.log(error);
+			return Promise.reject({
+				error: error,
+			});
+		});
 }
 
 export { client };

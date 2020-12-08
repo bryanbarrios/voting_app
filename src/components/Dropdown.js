@@ -2,8 +2,9 @@ import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { TextError } from './TextError';
 import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 
-export const Dropdown = ({ label, name, ...rest }) => {
+export const Dropdown = ({ label, name, isAsync, ...rest }) => {
 	return (
 		<div className="flex flex-col my-1">
 			<label
@@ -12,10 +13,16 @@ export const Dropdown = ({ label, name, ...rest }) => {
 			>
 				{label}
 			</label>
-			<Field id={name} name={name} {...rest} as={DropdownComponent} />
+			<Field
+				id={name}
+				name={name}
+				{...rest}
+				as={isAsync ? AsyncDropdownComponent : DropdownComponent}
+			/>
 			<ErrorMessage name={name} component={TextError} />
 		</div>
 	);
 };
 
-const DropdownComponent = ({ ...rest }) => <AsyncSelect {...rest} />;
+const AsyncDropdownComponent = ({ ...rest }) => <AsyncSelect {...rest} />;
+const DropdownComponent = ({ ...rest }) => <Select {...rest} />;

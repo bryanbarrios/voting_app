@@ -26,7 +26,7 @@ const useVerification = () => {
 	const { token, setToken } = useContext(VerificationContext);
 	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const [hasErrors, setHasErrors] = useState({ message: '' });
+	const [hasErrors, setHasErrors] = useState(null);
 
 	const verification = useCallback(
 		(data) => {
@@ -39,7 +39,7 @@ const useVerification = () => {
 				})
 				.catch((error) => {
 					setIsLoading(false);
-					setHasErrors({ message: error.message });
+					setHasErrors(error);
 				});
 		},
 		[setToken]
