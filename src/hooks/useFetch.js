@@ -61,6 +61,7 @@ export const useFetch = () => {
 					setIsSuccess(true);
 					setIsLoading(false);
 					setResponse(response);
+					window.location.assign(window.location);
 				})
 				.catch((error) => {
 					setIsSuccess(false);

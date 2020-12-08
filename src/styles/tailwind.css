@@ -2,37 +2,70 @@
 
 @tailwind components;
 @layer components {
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    @apply appearance-none m-0
-  }
+	.card__container {
+		width: 280px;
+		@apply h-auto shadow-md p-3 m-2 flex flex-col justify-between rounded-lg;
+	}
+
+	.card__image__container {
+		@apply flex justify-center flex-wrap flex-row;
+	}
+
+	.card__image__figure {
+		width: 100%;
+		height: 180px;
+	}
+
+	.card__image {
+		width: inherit;
+		height: inherit;
+		@apply object-cover rounded-lg;
+	}
+
+	.card__image__caption {
+		@apply text-xs text-gray-600 font-medium text-center;
+	}
+
+	.card__body__label {
+		@apply font-semibold text-xs text-black;
+	}
+
+	.card__body__text {
+		@apply font-bold text-xl;
+	}
+}
+@layer components {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		@apply appearance-none m-0;
+	}
 }
 
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: Inter;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Regular.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 500;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Medium.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 600;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-SemiBold.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../assets/fonts/inter/Inter-Bold.woff2) format('woff2');
-  }
+	@font-face {
+		font-family: Inter;
+		font-weight: 400;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Regular.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 500;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Medium.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 600;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-SemiBold.woff2) format('woff2');
+	}
+	@font-face {
+		font-family: Inter;
+		font-weight: 700;
+		font-display: swap;
+		src: url(../assets/fonts/inter/Inter-Bold.woff2) format('woff2');
+	}
 }
