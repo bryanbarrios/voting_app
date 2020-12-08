@@ -1,16 +1,16 @@
 import React, { useCallback } from 'react';
-import { Button } from '../Button';
-import { ErrorNotification } from '../ErrorNotification';
-import { Title } from '../Title';
-import { FormikControl } from '../FormikControl';
-import { useFetch } from '../../hooks/useFetch';
+import { Button } from '../../Button';
+import { ErrorNotification } from '../../ErrorNotification';
+import { Title } from '../../Title';
+import { FormikControl } from '../../FormikControl';
+import { useFetch } from '../../../hooks/useFetch';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { useClient } from '../../context/verification';
+import { useClient } from '../../../context/verification';
 
-export const VotingForm = ({ rowData, isUpdate }) => {
+export const CreateVotingForm = () => {
 	const client = useClient();
-	const { post, updateWithoutParameter, isLoading, hasErrors } = useFetch();
+	const { post, isLoading, hasErrors } = useFetch();
 	const VOTING_ENDPOINT = 'votation';
 	const CITY_ENDPOINT = 'catalog/city';
 	const CANDIDATE_ENDPOINT = 'candidate';
@@ -59,30 +59,13 @@ export const VotingForm = ({ rowData, isUpdate }) => {
 	];
 
 	const initialValues = {
-		votation_type_id:
-			rowData !== null
-				? {
-						label: rowData?.votationTypeName,
-						value: rowData?.votationTypeId,
-				  }
-				: '',
-		votation_description: rowData?.votationDescription || '',
-		votation_start_date: rowData?.votationStartDate || '',
-		votation_end_date: rowData?.votationEndDate || '',
-		city_id:
-			rowData !== null
-				? { label: rowData?.cityName, value: rowData?.cityId }
-				: '',
-		candidates:
-			rowData !== null
-				? rowData.candidates.map((candidate) => ({
-						label: `${candidate.firstName} ${candidate.middleName} ${candidate.lastName} ${candidate.surname} - ${candidate.politicalPartyName}`,
-						value: candidate.id,
-				  }))
-				: '',
+		votation_type_id: '',
+		votation_description: '',
+		votation_start_date: '',
+		votation_end_date: '',
+		city_id: '',
+		candidates: '',
 	};
-
-	console.log(initialValues.candidates);
 
 	const today = new Date();
 	const currentDate =
@@ -118,16 +101,13 @@ export const VotingForm = ({ rowData, isUpdate }) => {
 			votation_type_id: values.votation_type_id.value,
 			city_id: values.city_id.value,
 			candidates: values.candidates.map((candidate) => candidate.value),
-			...(isUpdate && { votation_id: rowData.id }),
 		};
-		isUpdate
-			? updateWithoutParameter(VOTING_ENDPOINT, data)
-			: post(VOTING_ENDPOINT, data);
+		post(VOTING_ENDPOINT, data);
 	};
 
 	return (
 		<div>
-			<Title text={isUpdate ? 'Edición de votación' : 'Apertura de votación'} />
+			<Title text="Apertura de votación" />
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}
@@ -158,7 +138,6 @@ export const VotingForm = ({ rowData, isUpdate }) => {
 							label="Fecha de apertura"
 							name="votation_start_date"
 							placeholder="Seleccione una fecha de apertura"
-							value={formik.values.votation_start_date}
 						/>
 						<FormikControl
 							control="input"
@@ -198,9 +177,7 @@ export const VotingForm = ({ rowData, isUpdate }) => {
 						/>
 						<Button
 							type="submit"
-							text={
-								isLoading ? 'Cargando...' : isUpdate ? 'Editar' : 'Aperturar'
-							}
+							text={isLoading ? 'Cargando...' : 'Aperturar'}
 							variantColor="secondary"
 							isBlock={true}
 							isDisable={isLoading}

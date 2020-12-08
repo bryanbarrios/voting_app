@@ -9,9 +9,10 @@ export const DashboardScreen = () => {
 				Votaciones.
 			</p>
 			<img
-				src="https://images.pexels.com/photos/97080/pexels-photo-97080.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+				src="https://res.cloudinary.com/dejau9zgq/image/upload/v1607428848/DataV.svg"
 				alt="Data"
-				className="w-full h-64 rounded-lg object-cover"
+				className="rounded-lg object-cover"
+				style={{height: '420px', margin: '0 auto'}}
 			/>
 			<p>
 				Se incluye la administración de usuarios, candidatos, partidos

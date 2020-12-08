@@ -12,6 +12,7 @@ import { IconButton } from './IconButton';
 import { IndeterminateCheckbox } from './IndeterminateCheckbox';
 import { Pagination } from './Pagination';
 import { Spinner } from './Spinner';
+import { Switch } from './Switch';
 
 export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 	const [controlledPageCount, setControlledPageCount] = useState(0);
@@ -44,7 +45,7 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 				pageIndex: 0,
 				hiddenColumns: [
 					path !== 'user' && 'selection',
-					path === 'votation' && 'edit',
+					path !== 'votation' && 'status',
 				],
 			},
 			manualPagination: true,
@@ -59,7 +60,6 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 			hooks.visibleColumns.push((columns) => [
 				{
 					id: 'selection',
-					show: path === 'user',
 					Header: ({ getToggleAllPageRowsSelectedProps }) => (
 						<div>
 							<IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
@@ -72,6 +72,21 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 					),
 				},
 				...columns,
+				{
+					id: 'status',
+					Header: ({ getToggleAllPageRowsSelectedProps }) => (
+						<div>
+							<p {...getToggleAllPageRowsSelectedProps()}>Estado</p>
+						</div>
+					),
+					Cell: ({ row }) => (
+						<Switch
+							isChecked={row.original.votationStatus}
+							id={row.original.id}
+							path={path}
+						/>
+					),
+				},
 				{
 					id: 'edit',
 					Cell: ({ row }) => (
@@ -224,7 +239,7 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 					</div>
 				</div>
 			</div>
-			<pre className="py-3">
+			{/* <pre className="py-3">
 				<code>
 					{JSON.stringify(
 						{
@@ -243,7 +258,7 @@ export const Table = ({ columns, path, rowData, isUpdate, isOpen }) => {
 						2
 					)}
 				</code>
-			</pre>
+			</pre> */}
 		</>
 	);
 };

@@ -4,6 +4,7 @@ import { VotingForm } from '../components/forms/VotingForm';
 import { Modal } from '../components/Modal';
 import { Table } from '../components/Table';
 import { Title } from '../components/Title';
+import { formateDate } from '../utils/formatedDate';
 
 export const VotingScreen = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -32,17 +33,11 @@ export const VotingScreen = () => {
 			},
 			{
 				Header: 'Fecha de apertura',
-				accessor: (v) =>
-					new Date(v.votationStartDate).toLocaleDateString('es-NI'),
+				accessor: (v) => formateDate(v.votationStartDate),
 			},
 			{
 				Header: 'Fecha de cierre',
-				accessor: (v) =>
-					new Date(v.votationEndDate).toLocaleDateString('es-NI'),
-			},
-			{
-				Header: 'Estado',
-				accessor: (v) => (v.votationStatus ? 'Activa' : 'Inactiva'),
+				accessor: (v) => formateDate(v.votationEndDate),
 			},
 		],
 		[]
@@ -61,7 +56,10 @@ export const VotingScreen = () => {
 				variantColor="secondary"
 			/>
 			<Modal openModal={isOpen} closeModel={() => setIsOpen(false)}>
-				<VotingForm rowData={rowData} isUpdate={isUpdate} />
+				<VotingForm
+					rowData={rowData}
+					isUpdate={isUpdate}
+				/>
 			</Modal>
 			<Table
 				columns={columns}

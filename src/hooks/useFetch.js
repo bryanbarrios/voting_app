@@ -9,24 +9,6 @@ export const useFetch = () => {
 
 	const client = useClient();
 
-	const get = useCallback(
-		(endpoint) => {
-			setIsLoading(true);
-			client(endpoint)
-				.then((data) => {
-					setIsLoading(false);
-					setIsSuccess(true);
-					setResponse(data);
-				})
-				.catch((error) => {
-					setIsLoading(false);
-					setIsSuccess(false);
-					setHasErrors(error);
-				});
-		},
-		[client]
-	);
-
 	const post = useCallback(
 		(endpoint, data) => {
 			setIsLoading(true);
@@ -68,6 +50,49 @@ export const useFetch = () => {
 		[client]
 	);
 
+	const updateStatus = useCallback(
+		(endpoint, id, status, data) => {
+			setIsLoading(true);
+			client(`${endpoint}/${id}/status/${status}`, {
+				method: 'PUT',
+				data,
+			})
+				.then((response) => {
+					setIsSuccess(true);
+					setIsLoading(false);
+					setResponse(response);
+				})
+				.catch((error) => {
+					setIsSuccess(false);
+					setIsLoading(false);
+					setHasErrors(error);
+				});
+		},
+		[client]
+	);
+
+	const updateWithoutParameter = useCallback(
+		(endpoint, data) => {
+			setIsLoading(true);
+			client(endpoint, {
+				method: 'PUT',
+				data,
+			})
+				.then((response) => {
+					setIsSuccess(true);
+					setIsLoading(false);
+					setResponse(response);
+					window.location.assign(window.location);
+				})
+				.catch((error) => {
+					setIsSuccess(false);
+					setIsLoading(false);
+					setHasErrors(error);
+				});
+		},
+		[client]
+	);
+
 	const remove = useCallback(
 		(endpoint, data) => {
 			setIsLoading(true);
@@ -91,9 +116,10 @@ export const useFetch = () => {
 	);
 
 	return {
-		get,
 		post,
 		update,
+		updateWithoutParameter,
+		updateStatus,
 		remove,
 		isLoading,
 		isSuccess,

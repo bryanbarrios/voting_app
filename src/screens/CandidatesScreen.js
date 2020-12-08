@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Button } from '../components/Button';
-import { CandidateForm } from '../components/forms/CandidateForm';
+import { CreateCandidateForm } from '../components/forms/candidate/CreateCandidateForm';
+import { EditCandidateForm } from '../components/forms/candidate/EditCandidateForm';
 import { Modal } from '../components/Modal';
 import { Table } from '../components/Table';
 import { Title } from '../components/Title';
@@ -54,7 +55,11 @@ export const CandidatesScreen = () => {
 				variantColor="secondary"
 			/>
 			<Modal openModal={isOpen} closeModel={() => setIsOpen(false)}>
-				<CandidateForm rowData={rowData} isUpdate={isUpdate} />
+				{isUpdate ? (
+					<EditCandidateForm rowData={rowData} />
+				) : (
+					<CreateCandidateForm />
+				)}
 			</Modal>
 			<Table
 				columns={columns}
