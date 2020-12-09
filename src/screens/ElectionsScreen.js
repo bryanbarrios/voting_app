@@ -35,6 +35,12 @@ const ElectionsScreen = () => {
 			<h2 className="text-xl text-secondary-500 font-semibold mb-4">
 				Elecciones disponibles
 			</h2>
+			{data === null ||
+				(!data.votationStatus && (
+					<p className="text-gray-500 font-medium text-lg">
+						⚠ Sin elecciones activas en este momento, regrese más tarde.
+					</p>
+				))}
 			<div className="space-y-3">
 				{data !== null &&
 					data.map(
